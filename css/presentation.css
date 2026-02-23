@@ -1,0 +1,3742 @@
+/* ProveIT Presentation Styles
+   Based on CESMII Brand Book 2021 & PowerPoint Run of Show
+   ========================================================= */
+
+/* CSS Variables - Brand Colors */
+:root {
+    /* Primary Colors */
+    --primary-blue: #4084ef;
+    --primary-dark: #231f20;
+
+    /* Secondary Colors */
+    --cyan: #00aeef;
+    --blue: #2b47da;
+    --purple: #5438d4;
+    --deep-purple: #4d006e;
+    --magenta: #c41ead;
+
+    /* Neutral Colors */
+    --white: #ffffff;
+
+    /* Typography */
+    --font-headline: Arial, Helvetica, sans-serif;
+    --font-body: Arial, Helvetica, sans-serif;
+
+    /* Transitions */
+    --transition-normal: 0.5s ease;
+    --transition-slow: 1s ease;
+}
+
+/* Reset */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    /* Base font size optimized for 1920x1080 */
+    font-size: 16px;
+}
+
+html, body {
+    height: 100%;
+    overflow: hidden;
+}
+
+body {
+    font-family: var(--font-body);
+    background: #000;
+    color: var(--white);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* =============================================
+   PRELOADER
+   ============================================= */
+.preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(135deg, #1a1a2e 0%, #0f0f1a 50%, #1a0a2e 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+.preloader.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.preloader-content {
+    text-align: center;
+    max-width: 500px;
+    padding: 2rem;
+}
+
+.preloader-logo {
+    width: 200px;
+    margin-bottom: 1.5rem;
+    animation: preloaderPulse 2s ease-in-out infinite;
+}
+
+@keyframes preloaderPulse {
+    0%, 100% { opacity: 0.8; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.05); }
+}
+
+.preloader-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 2rem;
+    letter-spacing: 0.1em;
+}
+
+.preloader-progress-container {
+    width: 100%;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 1rem;
+}
+
+.preloader-progress-bar {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, var(--cyan), var(--purple), var(--magenta));
+    border-radius: 4px;
+    transition: width 0.3s ease;
+}
+
+.preloader-percent {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--cyan);
+    margin-bottom: 0.5rem;
+}
+
+.preloader-status {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.6);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+}
+
+body.loading .slides-container,
+body.loading .slide-nav {
+    visibility: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Slides Container - locked to 17:9 aspect ratio */
+.slides-container {
+    width: 100vw;
+    height: 100vh;
+    max-width: 177.78vh; /* 16:9 ratio (100vh * 16/9) */
+    max-height: 56.25vw; /* 16:9 ratio (100vw * 9/16) */
+    overflow: hidden;
+    position: relative;
+}
+
+/* Scale adjustments for different screen sizes */
+@media screen and (min-width: 1920px) {
+    html {
+        font-size: 18px;
+    }
+}
+
+@media screen and (max-width: 1600px) {
+    html {
+        font-size: 15px;
+    }
+}
+
+@media screen and (max-width: 1366px) {
+    html {
+        font-size: 14px;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    html {
+        font-size: 12px;
+    }
+}
+
+/* =============================================
+   Slide Transition Overlay (12 to 14)
+   ============================================= */
+.slide-transition-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1000;
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.slide-transition-overlay .transition-logo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+}
+
+/* =============================================
+   Slide 26 to 27 Circle Wipe Transition
+   ============================================= */
+.circle-wipe-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1000;
+    pointer-events: none;
+    opacity: 0;
+    visibility: hidden;
+    /* Dimensions are set by JavaScript to match 16:9 slides container */
+}
+
+.circle-wipe-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.circle-wipe-overlay .wipe-circle {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    z-index: 15;
+}
+
+.circle-wipe-overlay.active .wipe-circle {
+    animation: circleWipeAcross 1.8s ease-in-out forwards;
+}
+
+.circle-wipe-overlay .wipe-mask {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background: transparent;
+    overflow: hidden;
+}
+
+.circle-wipe-overlay.active .wipe-mask {
+    animation: wipeMaskExpand 1.8s ease-in-out forwards;
+}
+
+@keyframes circleWipeAcross {
+    0% {
+        left: 0%;
+        opacity: 1;
+    }
+    100% {
+        left: 100%;
+        opacity: 1;
+    }
+}
+
+@keyframes wipeMaskExpand {
+    0% {
+        width: 0%;
+    }
+    100% {
+        width: 100%;
+    }
+}
+
+/* Shimmering vertical line */
+.circle-wipe-overlay .wipe-shimmer-line {
+    position: absolute;
+    top: 0;
+    left: 0%;
+    width: 8px;
+    height: 100%;
+    background: linear-gradient(to bottom,
+        transparent 0%,
+        rgba(255, 255, 255, 0.3) 10%,
+        rgba(0, 174, 239, 0.6) 25%,
+        rgba(255, 255, 255, 0.9) 40%,
+        rgba(255, 255, 255, 1) 50%,
+        rgba(255, 255, 255, 0.9) 60%,
+        rgba(0, 174, 239, 0.6) 75%,
+        rgba(255, 255, 255, 0.3) 90%,
+        transparent 100%);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.8),
+                0 0 40px rgba(0, 174, 239, 0.6),
+                0 0 60px rgba(255, 255, 255, 0.4);
+    opacity: 0;
+    z-index: 10;
+}
+
+.circle-wipe-overlay.active .wipe-shimmer-line {
+    animation: shimmerLineAcross 1.8s ease-in-out forwards, shimmerPulse 0.15s ease-in-out infinite;
+}
+
+@keyframes shimmerLineAcross {
+    0% {
+        left: 0%;
+        opacity: 1;
+    }
+    100% {
+        left: 100%;
+        opacity: 1;
+    }
+}
+
+@keyframes shimmerPulse {
+    0%, 100% {
+        box-shadow: 0 0 20px rgba(255, 255, 255, 0.8),
+                    0 0 40px rgba(0, 174, 239, 0.6),
+                    0 0 60px rgba(255, 255, 255, 0.4);
+    }
+    50% {
+        box-shadow: 0 0 30px rgba(255, 255, 255, 1),
+                    0 0 50px rgba(0, 174, 239, 0.8),
+                    0 0 70px rgba(255, 255, 255, 0.6);
+    }
+}
+
+/* =============================================
+   Álvaro Futuristic Enclosing Panels Transition
+   ============================================= */
+
+.alvaro-transition-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    pointer-events: none;
+}
+
+.alvaro-panel {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: var(--primary-blue);
+    transition: clip-path 0.6s cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+.alvaro-panel-top {
+    clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+}
+
+.alvaro-panel-bottom {
+    clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0 100%);
+}
+
+/* Panels close to cover the full screen */
+.alvaro-transition-overlay.closing .alvaro-panel-top {
+    clip-path: polygon(0 0, 100% 0, 100% 55%, 0 45%);
+}
+
+.alvaro-transition-overlay.closing .alvaro-panel-bottom {
+    clip-path: polygon(0 45%, 100% 55%, 100% 100%, 0 100%);
+}
+
+/* Panels open to reveal new slide */
+.alvaro-transition-overlay.opening .alvaro-panel-top {
+    clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+    transition: clip-path 0.6s cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+.alvaro-transition-overlay.opening .alvaro-panel-bottom {
+    clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0 100%);
+    transition: clip-path 0.6s cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+/* =============================================
+   Slide 1 to 2 Logo Shrink Transition
+   ============================================= */
+
+#slide-1 .cesmii-hero-logo {
+    z-index: 100;
+}
+
+#slide-1.logo-shrinking {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transition: none !important;
+}
+
+#slide-2.logo-transition-in {
+    transition: none !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+#slide-2.logo-transition-in .slide-content {
+    opacity: 0;
+}
+
+#slide-2.logo-transition-in.content-fade-in .slide-content {
+    opacity: 1;
+    transition: opacity 0.5s ease-out;
+}
+
+#slide-2.logo-transition-in .slide-footer .cesmii-logo-small {
+    opacity: 0;
+}
+
+/* Slide 2 to 3 Logo Expand Transition */
+#slide-2.logo-expanding {
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+#slide-2.logo-expanding .slide-content {
+    transition: opacity 1.8s ease-out;
+}
+
+#slide-3.logo-transition-in {
+    transition: none !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+#slide-3.logo-transition-in .slide-content {
+    opacity: 0 !important;
+    visibility: hidden;
+}
+
+#slide-3.logo-transition-in.content-fade-in .slide-content {
+    opacity: 1 !important;
+    visibility: visible;
+    transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+}
+
+/* Slide 15 to 16 Background Crossfade */
+#slide-16.bg-crossfade-out {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transition: none !important;
+}
+
+#slide-17.bg-crossfade-in {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transition: none !important;
+}
+
+/* Individual Slide */
+.slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.7s ease, visibility 0.7s ease;
+}
+
+.slide.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Slide Background */
+.slide-background {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    background: #000;
+}
+
+/* Video Background */
+.video-bg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    transform: translate(-50%, -50%);
+    object-fit: cover;
+    z-index: 1;
+}
+
+/* Subtle overlay to ensure text readability */
+.video-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.15);
+    z-index: 2;
+}
+
+/* Darker overlay image for slide 2 */
+.darker-overlay {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.80;
+    z-index: 2;
+}
+
+/* Slide Content */
+.slide-content {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    width: 100%;
+    max-width: 1600px;
+    padding: 2rem 3rem;
+}
+
+/* Fullscreen Image Slides */
+.slide-fullscreen-image .slide-content {
+    max-width: 100%;
+    padding: 0;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.fullscreen-image {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+}
+
+.fullscreen-image-85 {
+    max-width: 85%;
+    max-height: 85%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+}
+
+/* Centered Logo Slides (30% size) */
+.slide-logo-centered .slide-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+}
+
+.centered-logo-30 {
+    max-width: 40%;
+    max-height: 40%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+}
+
+/* Solid black background */
+.solid-black-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+}
+
+/* ==========================================
+   SLIDE 1: CESMII Title
+   ========================================== */
+
+.cesmii-hero-logo {
+    animation: fadeInUp 1s ease-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cesmii-hero-logo img {
+    max-width: 70%;
+    width: auto;
+    height: auto;
+    max-height: 60vh;
+    filter: drop-shadow(0 4px 30px rgba(0, 0, 0, 0.3));
+}
+
+
+/* ==========================================
+   SLIDE 2: Featuring Speakers
+   ========================================== */
+
+/* Speaker Images Row */
+/* Slide 2 content raised up */
+.slide-3 .slide-content {
+    transform: translateY(-8%);
+}
+
+.speakers-images {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 4rem;
+    animation: fadeInUp 0.8s ease-out;
+}
+
+.speaker-image {
+    width: 504px;
+    height: 612px;
+    overflow: hidden;
+}
+
+.speaker-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center bottom;
+}
+
+/* Scale John's image to match Jonathan's size */
+.speakers-images .speaker-image:nth-child(1) img {
+    transform: scale(1.40);
+    transform-origin: center bottom;
+}
+
+/* Divider Line */
+.divider-line {
+    width: 100%;
+    height: 3px;
+    margin: 0 0 1.5rem 0;
+    background: linear-gradient(90deg,
+        transparent 0%,
+        var(--cyan) 10%,
+        var(--cyan) 90%,
+        transparent 100%
+    );
+    box-shadow: 0 0 20px rgba(0, 174, 239, 0.5);
+    animation: lineGlow 2s ease-in-out infinite alternate;
+}
+
+/* Speaker Info Row */
+.speakers-info {
+    display: flex;
+    justify-content: center;
+    gap: 4rem;
+    animation: fadeInUp 0.8s ease-out 0.3s both;
+}
+
+.speaker-info {
+    width: 504px;
+    text-align: left;
+}
+
+.speaker-name {
+    font-family: var(--font-body);
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 0.25rem;
+    line-height: 1.1;
+    white-space: nowrap;
+}
+
+.speaker-title {
+    font-family: var(--font-body);
+    font-size: 1.25rem;
+    font-weight: 400;
+    color: var(--white);
+    opacity: 0.9;
+}
+
+/* ==========================================
+   SLIDE 5: Simpsons Video
+   ========================================== */
+
+.slide-5 .slide-content {
+    width: 1920px;
+    height: 1080px;
+    max-width: none;
+    padding: 0;
+    transform-origin: center center;
+    /* Scale is calculated by JavaScript */
+}
+
+.Simpsons-Video {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1920px;
+    height: 1080px;
+}
+
+.simpsons-clip {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+
+/* ==========================================
+   SLIDES 6-9: Smart Manufacturing Imperatives
+   ========================================== */
+
+.imperatives-title {
+    font-family: var(--font-body);
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--white);
+    text-align: center;
+    margin-bottom: 2rem;
+    animation: fadeInUp 0.8s ease-out;
+}
+
+.imperatives-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    max-width: 1000px;
+    margin: 0 auto;
+    animation: fadeInUp 0.8s ease-out 0.2s both;
+}
+
+.imperatives-grid.two-column {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+}
+
+.imperative-box {
+    display: flex;
+    background: rgba(0, 32, 96, 0.9);
+    border-radius: 8px;
+    padding: 1.5rem;
+    gap: 1rem;
+}
+
+.imperative-number {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--cyan);
+    line-height: 1;
+    min-width: 50px;
+}
+
+.imperative-content h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 0.5rem;
+}
+
+.imperative-content p {
+    font-size: 0.95rem;
+    color: var(--white);
+    opacity: 0.9;
+    margin-bottom: 0.25rem;
+}
+
+.imperative-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100px;
+}
+
+.imperative-icon img {
+    max-height: 60px;
+    width: auto;
+}
+
+/* ==========================================
+   SLIDE 6 V2: Smart Manufacturing Imperatives (New Layout)
+   ========================================== */
+
+.slide-imperatives-v2 .slide-content {
+    padding: 15rem 12rem;
+}
+
+.slide-imperatives-v2 .imperatives-title-v2 {
+    font-family: var(--font-body);
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--white);
+    text-align: center;
+    margin-bottom: 4rem;
+    animation: fadeInUp 0.8s ease-out;
+}
+
+.slide-imperatives-v2 .imperatives-grid-v2 {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    width: 95%;
+    max-width: none;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.slide-imperatives-v2 .imperative-row {
+    display: flex;
+    align-items: stretch;
+    gap: 2rem;
+    width: 100%;
+    max-width: none;
+}
+
+/* All rows - tumble box, then wipe text */
+.slide-imperatives-v2 .imperative-row:nth-child(1),
+.slide-imperatives-v2 .imperative-row:nth-child(2),
+.slide-imperatives-v2 .imperative-row:nth-child(3) {
+    opacity: 1;
+}
+
+.slide-imperatives-v2 .imperative-row:nth-child(2) {
+    margin-left: 0;
+}
+
+.slide-imperatives-v2 .imperative-row:nth-child(1) {
+    margin-left: 0;
+}
+
+/* Circle - circle shape in */
+.slide-imperatives-v2 .imperative-row:nth-child(1) .imperative-circle,
+.slide-imperatives-v2 .imperative-row:nth-child(2) .imperative-circle,
+.slide-imperatives-v2 .imperative-row:nth-child(3) .imperative-circle {
+    clip-path: circle(0% at 50% 50%);
+    transition: clip-path 0.8s ease-out;
+}
+
+.slide-imperatives-v2 .imperative-row:nth-child(1).visible .imperative-circle,
+.slide-imperatives-v2 .imperative-row:nth-child(2).visible .imperative-circle,
+.slide-imperatives-v2 .imperative-row:nth-child(3).visible .imperative-circle {
+    clip-path: circle(75% at 50% 50%);
+}
+
+/* Blue box - wipe in from left after circle */
+.slide-imperatives-v2 .imperative-row:nth-child(1) .imperative-number-box,
+.slide-imperatives-v2 .imperative-row:nth-child(2) .imperative-number-box,
+.slide-imperatives-v2 .imperative-row:nth-child(3) .imperative-number-box {
+    clip-path: inset(0 100% 0 0);
+    transition: clip-path 1s ease-out;
+    position: relative;
+}
+
+.slide-imperatives-v2 .imperative-row:nth-child(1).visible .imperative-number-box,
+.slide-imperatives-v2 .imperative-row:nth-child(2).visible .imperative-number-box,
+.slide-imperatives-v2 .imperative-row:nth-child(3).visible .imperative-number-box {
+    clip-path: inset(0 0 0 0);
+}
+
+/* Glisten line for blue box wipe */
+.slide-imperatives-v2 .imperative-row:nth-child(1) .imperative-number-box::after,
+.slide-imperatives-v2 .imperative-row:nth-child(2) .imperative-number-box::after,
+.slide-imperatives-v2 .imperative-row:nth-child(3) .imperative-number-box::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 12px;
+    height: 100%;
+    background: linear-gradient(
+        to bottom,
+        transparent 0%,
+        rgba(255, 255, 255, 0.3) 20%,
+        rgba(0, 174, 239, 0.8) 40%,
+        rgba(255, 255, 255, 1) 50%,
+        rgba(0, 174, 239, 0.8) 60%,
+        rgba(255, 255, 255, 0.3) 80%,
+        transparent 100%
+    );
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.9),
+                0 0 30px rgba(0, 174, 239, 0.7);
+    opacity: 0;
+    pointer-events: none;
+}
+
+.slide-imperatives-v2 .imperative-row:nth-child(1).visible .imperative-number-box::after,
+.slide-imperatives-v2 .imperative-row:nth-child(2).visible .imperative-number-box::after,
+.slide-imperatives-v2 .imperative-row:nth-child(3).visible .imperative-number-box::after {
+    animation: boxWipeGlisten 1s ease-out forwards;
+}
+
+@keyframes boxWipeGlisten {
+    0% {
+        left: 0;
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        left: 100%;
+        opacity: 0;
+    }
+}
+
+/* Text - wipe in from left after box wipe */
+.slide-imperatives-v2 .imperative-row:nth-child(1) .imperative-text,
+.slide-imperatives-v2 .imperative-row:nth-child(2) .imperative-text,
+.slide-imperatives-v2 .imperative-row:nth-child(3) .imperative-text {
+    clip-path: inset(0 100% 0 0);
+    transition: clip-path 2s ease-out 1s;
+    position: relative;
+}
+
+.slide-imperatives-v2 .imperative-row:nth-child(1).visible .imperative-text,
+.slide-imperatives-v2 .imperative-row:nth-child(2).visible .imperative-text,
+.slide-imperatives-v2 .imperative-row:nth-child(3).visible .imperative-text {
+    clip-path: inset(0 0 0 0);
+}
+
+/* Glisten line for text wipe */
+.slide-imperatives-v2 .imperative-row:nth-child(1) .imperative-text::after,
+.slide-imperatives-v2 .imperative-row:nth-child(2) .imperative-text::after,
+.slide-imperatives-v2 .imperative-row:nth-child(3) .imperative-text::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 12px;
+    height: 100%;
+    background: linear-gradient(
+        to bottom,
+        transparent 0%,
+        rgba(255, 255, 255, 0.3) 20%,
+        rgba(0, 174, 239, 0.8) 40%,
+        rgba(255, 255, 255, 1) 50%,
+        rgba(0, 174, 239, 0.8) 60%,
+        rgba(255, 255, 255, 0.3) 80%,
+        transparent 100%
+    );
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.9),
+                0 0 30px rgba(0, 174, 239, 0.7);
+    opacity: 0;
+    pointer-events: none;
+}
+
+.slide-imperatives-v2 .imperative-row:nth-child(1).visible .imperative-text::after,
+.slide-imperatives-v2 .imperative-row:nth-child(2).visible .imperative-text::after,
+.slide-imperatives-v2 .imperative-row:nth-child(3).visible .imperative-text::after {
+    animation: textWipeGlisten 2s ease-out 1s forwards;
+}
+
+@keyframes textWipeGlisten {
+    0% {
+        left: 0;
+        opacity: 1;
+    }
+    99% {
+        left: 100%;
+        opacity: 1;
+    }
+    100% {
+        left: 100%;
+        opacity: 0;
+    }
+}
+
+.slide-imperatives-v2 .imperative-number-box {
+    flex-shrink: 0;
+    width: 340px;
+    min-height: 140px;
+    background: #002060;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+    position: relative;
+    padding: 1rem 1.5rem 1rem 70px;
+}
+
+.slide-imperatives-v2 .imperative-logo {
+    max-width: 240px;
+    max-height: 120px;
+    object-fit: contain;
+}
+
+.slide-imperatives-v2 .imperative-row:nth-child(2) .imperative-logo {
+    width: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.slide-imperatives-v2 .imperative-row:nth-child(3) .imperative-logo {
+    max-width: 300px;
+    max-height: 150px;
+}
+
+.slide-imperatives-v2 .imperative-logo.logo-large {
+    width: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.slide-imperatives-v2 .imperative-circle {
+    flex-shrink: 0;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-self: center;
+    position: relative;
+    z-index: 1;
+    margin-right: -93px;
+}
+
+.slide-imperatives-v2 .imperative-circle span {
+    font-family: var(--font-body);
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: #9FB520;
+    line-height: 1;
+}
+
+.slide-imperatives-v2 .imperative-text {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0.5rem 0;
+    text-align: left;
+}
+
+.slide-imperatives-v2 .imperative-text p {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.4rem;
+    color: var(--white);
+    line-height: 1.4;
+    margin-bottom: 0.2rem;
+}
+
+.slide-imperatives-v2 .imperative-text .accent {
+    color: #9FB520;
+    font-weight: 700;
+}
+
+
+/* ==========================================
+   SLIDE 8: ProveIT Timeline
+   ========================================== */
+.slide-proveit-timeline .slide-bg-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.slide-proveit-timeline .slide-content {
+    display: flex;
+    align-items: flex-end;
+    height: 100%;
+    padding: 0;
+    max-width: 100%;
+}
+
+.timeline-cards {
+    display: flex;
+    width: 100%;
+    height: 50%;
+}
+
+.timeline-card {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    background: linear-gradient(to top, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 1) 50%, rgba(0, 0, 0, 0) 100%);
+    padding: 1rem 1rem 0 1rem;
+    gap: 0.5rem;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+    position: relative;
+}
+
+.timeline-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.timeline-card:last-child {
+    border-right: none;
+}
+
+.timeline-text {
+    text-align: center;
+}
+
+.timeline-year {
+    font-family: var(--font-heading);
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 0.2rem;
+}
+
+.timeline-desc {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    color: white;
+    line-height: 1.3;
+    font-weight: 700;
+}
+
+.timeline-logo {
+    max-width: 80%;
+    max-height: 100px;
+    object-fit: contain;
+}
+
+.timeline-footer {
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: white;
+    background: var(--primary-blue);
+    padding: 0.5rem 1rem;
+    text-align: center;
+    width: calc(100% + 2rem);
+    margin-left: -1rem;
+    margin-bottom: 4rem;
+}
+
+
+.timeline-footer[data-card="1"] { background: #8CC63F; }
+.timeline-footer[data-card="2"] { background: #009A9A; }
+.timeline-footer[data-card="3"] { background: #00B8B0; }
+.timeline-footer[data-card="4"] { background: #00ABEE; }
+.timeline-footer[data-card="5"] { background: #13216F; }
+
+/* ==========================================
+   SLIDE 9: SM Platform Benefits
+   ========================================== */
+.benefits-bg {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, red, #8b0000);
+}
+
+.slide-benefits .slide-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.benefits-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.benefit-item {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    opacity: 0;
+}
+
+.benefit-item.visible {
+    opacity: 1;
+}
+
+.benefit-item.visible .benefit-icon {
+    animation: stampIn 0.8s ease-out forwards;
+}
+
+.benefit-item.visible .benefit-text {
+    animation: fadeSlideIn 1s ease-out 0.7s forwards;
+}
+
+.benefit-item:nth-child(2).visible .benefit-icon { animation-delay: 1.7s; }
+.benefit-item:nth-child(2).visible .benefit-text { animation-delay: 2.4s; }
+
+.benefit-item:nth-child(3).visible .benefit-icon { animation-delay: 3.4s; }
+.benefit-item:nth-child(3).visible .benefit-text { animation-delay: 4.1s; }
+
+.benefit-item:nth-child(4).visible .benefit-icon { animation-delay: 5.1s; }
+.benefit-item:nth-child(4).visible .benefit-text { animation-delay: 5.8s; }
+
+.benefit-item:nth-child(5).visible .benefit-icon { animation-delay: 6.8s; }
+.benefit-item:nth-child(5).visible .benefit-text { animation-delay: 7.5s; }
+
+.benefit-icon {
+    width: 90px;
+    height: 90px;
+    object-fit: contain;
+    transform: scale(3);
+    opacity: 0;
+}
+
+.benefit-text {
+    font-family: var(--font-body);
+    font-size: 4.5rem;
+    color: white;
+    font-weight: 300;
+    opacity: 0;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+}
+
+@keyframes stampIn {
+    0% { transform: scale(3); opacity: 0; }
+    50% { transform: scale(0.9); opacity: 1; }
+    70% { transform: scale(1.05); opacity: 1; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes fadeSlideIn {
+    0% { opacity: 0; transform: translateX(-20px); }
+    100% { opacity: 1; transform: translateX(0); }
+}
+
+/* ==========================================
+   SLIDE 10: Panel Speakers
+   ========================================== */
+
+.panel-title {
+    font-family: var(--font-body);
+    font-size: 2.25rem;
+    font-weight: 400;
+    color: var(--white);
+    text-align: center;
+    margin-bottom: 2.5rem;
+    line-height: 1.3;
+    animation: fadeInUp 0.8s ease-out;
+}
+
+.panel-title .emphasis {
+    font-weight: 700;
+    color: var(--cyan);
+}
+
+.panel-grid {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 4rem;
+    width: 100%;
+    animation: fadeInUp 0.8s ease-out;
+}
+
+.panel-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 180px;
+    padding: 1.5rem 1rem;
+}
+
+.panel-section.full-row {
+    width: 100%;
+    margin-top: 0.5rem;
+}
+
+.panel-section-title {
+    font-family: var(--font-body);
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--cyan);
+    text-align: center;
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--cyan);
+    letter-spacing: 0.5px;
+}
+
+.panel-speakers {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem;
+}
+
+.panel-speakers.grid-2x2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+}
+
+.panel-speaker {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 150px;
+    clip-path: inset(0 100% 100% 0);
+    position: relative;
+}
+
+.panel-speaker::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(
+        120deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0) 30%,
+        rgba(255, 255, 255, 0.5) 50%,
+        rgba(255, 255, 255, 0) 70%,
+        transparent 100%
+    );
+    opacity: 0;
+    pointer-events: none;
+}
+
+.slide.active .panel-speaker {
+    animation: revealFromCorner 0.78s ease-out forwards;
+}
+
+.slide.active .panel-speaker::after {
+    animation: glisten 1.04s ease-out forwards;
+}
+
+@keyframes revealFromCorner {
+    from {
+        clip-path: inset(0 100% 100% 0);
+    }
+    to {
+        clip-path: inset(0 0 0 0);
+    }
+}
+
+@keyframes glisten {
+    0% {
+        left: -100%;
+        opacity: 0;
+    }
+    20% {
+        opacity: 1;
+    }
+    100% {
+        left: 150%;
+        opacity: 0;
+    }
+}
+
+/* Staggered glisten delays */
+.slide.active .panel-section:nth-child(1) .panel-speaker:nth-child(1)::after { animation-delay: 0.26s; }
+.slide.active .panel-section:nth-child(1) .panel-speaker:nth-child(2)::after { animation-delay: 0.52s; }
+.slide.active .panel-section:nth-child(2) .panel-speaker:nth-child(1)::after { animation-delay: 0.78s; }
+.slide.active .panel-section:nth-child(2) .panel-speaker:nth-child(2)::after { animation-delay: 1.04s; }
+.slide.active .panel-section:nth-child(2) .panel-speaker:nth-child(3)::after { animation-delay: 1.3s; }
+.slide.active .panel-section:nth-child(2) .panel-speaker:nth-child(4)::after { animation-delay: 1.56s; }
+.slide.active .panel-section:nth-child(3) .panel-speaker:nth-child(1)::after { animation-delay: 1.82s; }
+
+/* Staggered animation delays for each speaker */
+.slide.active .panel-section:nth-child(1) .panel-speaker:nth-child(1) { animation-delay: 0.26s; }
+.slide.active .panel-section:nth-child(1) .panel-speaker:nth-child(2) { animation-delay: 0.52s; }
+.slide.active .panel-section:nth-child(2) .panel-speaker:nth-child(1) { animation-delay: 0.78s; }
+.slide.active .panel-section:nth-child(2) .panel-speaker:nth-child(2) { animation-delay: 1.04s; }
+.slide.active .panel-section:nth-child(2) .panel-speaker:nth-child(3) { animation-delay: 1.3s; }
+.slide.active .panel-section:nth-child(2) .panel-speaker:nth-child(4) { animation-delay: 1.56s; }
+.slide.active .panel-section:nth-child(3) .panel-speaker:nth-child(1) { animation-delay: 1.82s; }
+
+.panel-speaker-image {
+    width: 120px;
+    height: 145px;
+    overflow: hidden;
+    border-radius: 6px;
+    background: transparent;
+    margin-bottom: 0.5rem;
+}
+
+.panel-speaker-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+}
+
+.panel-speaker-name {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--white);
+    text-align: center;
+    margin-bottom: 0.2rem;
+}
+
+.panel-speaker-title {
+    font-size: 0.75rem;
+    font-weight: 400;
+    color: var(--white);
+    opacity: 0.85;
+    text-align: center;
+    line-height: 1.3;
+    max-width: 140px;
+}
+
+.panel-speaker-logo {
+    max-width: 130px;
+    max-height: 40px;
+    width: auto;
+    height: auto;
+    margin-top: 0.5rem;
+    margin-bottom: 0.6rem;
+    object-fit: contain;
+}
+
+.panel-speaker-logo.logo-inductive {
+    max-width: 195px;
+    max-height: 60px;
+}
+
+
+/* ==========================================
+   SLIDE 6: CMAPI Working Group Members
+   ========================================== */
+
+.slide-cmapi .slide-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding: 2rem;
+}
+
+.cmapi-title {
+    font-family: var(--font-heading);
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--white);
+    text-align: center;
+    margin-bottom: 0.5rem;
+    line-height: 1.3;
+}
+
+.cmapi-emphasis {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--cyan);
+    letter-spacing: 0.15em;
+}
+
+.cmapi-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    width: 100%;
+}
+
+.cmapi-row {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.cmapi-member {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    text-align: center;
+    flex: 1;
+}
+
+.cmapi-member .cmapi-logo,
+.cmapi-member .cmapi-logo-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 112px;
+}
+
+.cmapi-logo-row {
+    display: flex;
+    align-items: center;
+    gap: 0;
+}
+
+.cmapi-member .logo-microsoft {
+    width: 282px;
+    height: 95px;
+    min-height: unset;
+}
+
+.cmapi-member .logo-opc {
+    width: 218px;
+    height: 73px;
+    min-height: unset;
+}
+
+.cmapi-logo-row .cmapi-logo:last-child {
+    margin-left: -6.5rem;
+}
+
+.cmapi-logo {
+    width: 270px;
+    height: 90px;
+    object-fit: contain;
+    margin-bottom: 0rem;
+}
+
+.cmapi-name {
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 1.105rem;
+    color: var(--cyan);
+    line-height: 1.3;
+}
+
+.logo-cesmii-cmapi {
+    width: 176px;
+    height: 59px;
+}
+
+.logo-flow-cmapi {
+    width: 216px;
+    height: 72px;
+}
+
+.logo-thinkiq {
+    width: 297px;
+    height: 99px;
+}
+
+.logo-schneider {
+    width: 324px;
+    height: 108px;
+}
+
+.logo-inductive-cmapi {
+    width: 189px;
+    height: 63px;
+}
+
+.logo-rockwell {
+    width: 324px;
+    height: 108px;
+}
+
+.logo-sas {
+    width: 151px;
+    height: 50px;
+}
+
+.logo-highbyte-cmapi {
+    width: 324px;
+    height: 108px;
+}
+
+.logo-aws-cmapi {
+    width: 324px;
+    height: 108px;
+}
+
+.logo-ge {
+    width: 246px;
+    height: 82px;
+}
+
+.logo-andersen {
+    width: 324px;
+    height: 138px;
+}
+
+.cmapi-row-cesmii {
+    align-items: center;
+    justify-content: center;
+    gap: 1.36rem;
+}
+
+.cmapi-row-cesmii .cmapi-logo {
+    min-height: unset;
+    margin-bottom: 0;
+    flex: none;
+}
+
+.cmapi-guest-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--cyan);
+    padding: 0.6rem 2rem;
+    text-align: center;
+}
+
+.cmapi-guest-bar p {
+    font-family: var(--font-body);
+    font-size: 1.2rem;
+    color: var(--white);
+    margin: 0;
+}
+
+
+/* ==========================================
+   SLIDE 9: Constraining Innovation Question
+   ========================================== */
+
+.constrain-gradient-bg {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top right, #6DA442 0%, #9FB521 100%);
+}
+
+.slide-constrain-question .slide-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.constrain-text {
+    max-width: 1200px;
+    padding: 2rem;
+}
+
+.constrain-text p {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 3.5rem;
+    font-weight: 400;
+    color: white;
+    text-align: center;
+    line-height: 1.4;
+}
+
+.constrain-text strong {
+    font-weight: 700;
+}
+
+/* ==========================================
+   SLIDE 6: Wonderware Video
+   ========================================== */
+
+.wonderware-gradient-bg {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top right, #4c016e 0%, #5338D3 100%);
+}
+
+.wonderware-layout {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    padding: 2% 3%;
+    gap: 3%;
+}
+
+.wonderware-video {
+    flex: 0 0 auto;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5);
+    display: flex;
+}
+
+.wonderware-video video {
+    max-width: 65vw;
+    max-height: 80vh;
+    object-fit: contain;
+}
+
+.wonderware-logos {
+    flex: 0 0 25%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+}
+
+.wonderware-logo {
+    width: 100%;
+    max-width: 320px;
+    height: auto;
+    filter: drop-shadow(0 4px 20px rgba(0, 0, 0, 0.3));
+}
+
+.windows-logo {
+    width: 72%;
+    max-width: 216px;
+    height: auto;
+    filter: drop-shadow(0 4px 20px rgba(0, 0, 0, 0.3));
+}
+
+
+/* ==========================================
+   SLIDE 11: Sponsor Logos
+   ========================================== */
+
+.sponsors-bg {
+    position: absolute;
+    inset: 0;
+    background: url('../assets/images/flagBackground.jpg') center/cover no-repeat;
+}
+
+.slide-sponsors .slide-content {
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+
+.sponsors-layout {
+    width: 1920px;
+    height: 1080px;
+    position: relative;
+    transform-origin: top left;
+}
+
+.sponsors-header {
+    position: absolute;
+    top: 1px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    z-index: 1;
+}
+
+.sponsors-header-logo {
+    height: 130px;
+    object-fit: contain;
+}
+
+.sponsors-boxes {
+    position: absolute;
+    top: 54px;
+    bottom: 54px;
+    left: 96px;
+    right: 96px;
+    display: flex;
+    gap: 360px;
+}
+
+.sponsors-border {
+    flex: 1;
+    border: 2px solid #FF6700;
+    border-radius: 4px;
+}
+
+.sponsors-border:first-child {
+    border-right: none;
+    border-radius: 4px 0 0 4px;
+}
+
+.sponsors-border:last-child {
+    border-left: none;
+    border-radius: 0 4px 4px 0;
+}
+
+.sponsors-grid {
+    position: absolute;
+    top: 150px;
+    bottom: 120px;
+    left: 120px;
+    right: 120px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    z-index: 1;
+}
+
+.sponsor-row {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.sponsor-row img {
+    height: 78px;
+    max-width: 188px;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+    opacity: 0.9;
+}
+
+.sponsors-footer {
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    z-index: 1;
+}
+
+.presented-by {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    color: white;
+    letter-spacing: 2px;
+    margin-bottom: -19px;
+}
+
+.sponsors-footer-logo {
+    height: 100px;
+    object-fit: contain;
+}
+
+/* ==========================================
+   SLIDE 11: Interoperability Bridge
+   ========================================== */
+
+.interop-bridge-bg {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, #5338D3 0%, #4C006D 100%);
+}
+
+.slide-interop-bridge .slide-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding: 0;
+    overflow: hidden;
+}
+
+.interop-bridge-img {
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+}
+
+/* ==========================================
+   SLIDE 12: i3X Connect Screenshot
+   ========================================== */
+
+.Computer-i3x {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    transform: scale(0.6);
+}
+
+.Computer-i3x img {
+    width: 1600px;
+    height: 900px;
+    object-fit: contain;
+    position: relative;
+    z-index: 1;
+}
+
+.Computer-i3x .monitor-website {
+    position: absolute;
+    width: 968px !important;
+    height: 558px !important;
+    top: 70px;
+    left: 50%;
+    transform: translateX(-50%);
+    border: none;
+    z-index: 2;
+    border-radius: 0;
+    object-fit: cover;
+    -webkit-mask-image: radial-gradient(ellipse 90% 85% at center, black 60%, transparent 100%);
+    mask-image: radial-gradient(ellipse 90% 85% at center, black 60%, transparent 100%);
+}
+
+.screenshot-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.link-callout {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: #FFFF00;
+    padding: 0.75rem 1.5rem;
+    color: #333;
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+/* ==========================================
+   SLIDE 14: Single Speaker Layout
+   ========================================== */
+
+#slide-14.slide-speaker {
+    align-items: center;
+}
+
+#slide-14 .slide-content {
+    padding-top: 0;
+    height: 100%;
+}
+
+/* Speaker slides with single PNG foreground */
+.speaker-full-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* ==========================================
+   SLIDE 21: Energy Sphere
+   ========================================== */
+
+.slide-energy-sphere .energy-sphere-gradient {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, #5338D3 0%, #4C006D 100%);
+    z-index: 0;
+}
+
+.slide-energy-sphere .energy-sphere-video {
+    z-index: 1;
+    opacity: 0.9;
+    transform: translate(-50%, -50%) scale(0.85);
+}
+
+.slide-energy-sphere .slide-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.energy-sphere-logo {
+    opacity: 0;
+    transition: opacity 2s ease-in;
+}
+
+.energy-sphere-logo.melting {
+    opacity: 1;
+}
+
+.energy-sphere-logo img {
+    width: 500px;
+    height: auto;
+    filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.5));
+}
+
+/* ==========================================
+   SLIDE 21
+   ========================================== */
+
+#slide-31.slide-speaker {
+    align-items: center;
+}
+
+#slide-31 .slide-content {
+    padding-top: 0;
+    height: 100%;
+}
+
+
+.single-speaker-layout {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    animation: fadeInUp 0.8s ease-out;
+}
+
+.speaker-image-row {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 4rem;
+}
+
+.single-speaker-layout .speaker-image {
+    width: 106.6vh;
+    height: auto;
+    position: relative;
+    margin-top: -2rem;
+}
+
+.single-speaker-layout .speaker-image > img:not(.speaker-halfcircle) {
+    position: relative;
+    z-index: 1;
+    width: 75%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+.speaker-halfcircle {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 110%;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.single-speaker-layout .speaker-image-row {
+    margin-left: -5%;
+}
+
+.single-speaker-layout .speaker-info {
+    width: auto;
+    text-align: left;
+    align-self: left;
+    white-space: nowrap;
+    margin-left: 5%;
+    animation: fadeInUp 0.8s ease-out 0.3s both;
+}
+
+.logo-side {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    height: 540px;
+}
+
+.partner-logo {
+    width: 400px;
+    height: auto;
+    filter: drop-shadow(0 4px 20px rgba(0, 0, 0, 0.3));
+}
+
+
+
+@keyframes lineGlow {
+    0% {
+        box-shadow: 0 0 10px rgba(0, 174, 239, 0.3);
+    }
+    100% {
+        box-shadow: 0 0 30px rgba(0, 174, 239, 0.7);
+    }
+}
+
+
+/* Slide Footer - CESMII Logo */
+.slide-footer {
+    position: absolute;
+    top: 1.5rem;
+    right: 2rem;
+    z-index: 20;
+}
+
+.cesmii-logo-small {
+    height: 40px;
+    width: auto;
+    opacity: 0.9;
+}
+
+/* Scroll Indicator */
+.scroll-indicator {
+    position: absolute;
+    bottom: 3rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    animation: fadeIn 1s ease-out 1.5s both;
+}
+
+.scroll-indicator span {
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    opacity: 0.6;
+}
+
+.mouse {
+    width: 26px;
+    height: 40px;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    border-radius: 13px;
+    position: relative;
+}
+
+.wheel {
+    width: 4px;
+    height: 8px;
+    background: var(--white);
+    border-radius: 2px;
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: scrollWheel 2s ease-in-out infinite;
+}
+
+@keyframes scrollWheel {
+    0%, 100% {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+    50% {
+        opacity: 0.3;
+        transform: translateX(-50%) translateY(10px);
+    }
+}
+
+/* Slide Navigation Dots */
+.slide-nav {
+    position: fixed;
+    right: 2rem;
+    top: 50%;
+    transform: translateY(-50%);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.6rem;
+    z-index: 100;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    /* Larger hover area via padding (invisible) */
+    padding: 2rem 4rem 2rem 4rem;
+    margin: -2rem -4rem -2rem -4rem;
+}
+
+.slide-nav:hover {
+    opacity: 1;
+}
+
+.nav-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.25);
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 0;
+}
+
+.nav-dot:hover {
+    border-color: rgba(255, 255, 255, 0.6);
+    transform: scale(1.2);
+}
+
+.nav-dot.active {
+    background: rgba(255, 255, 255, 0.5);
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+/* Nav dot tooltip */
+.nav-dot {
+    position: relative;
+}
+
+.nav-dot::before {
+    content: attr(data-label);
+    position: absolute;
+    right: calc(100% + 8px);
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.75);
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+}
+
+.nav-dot:hover::before {
+    opacity: 1;
+}
+
+/* Keyboard Hint */
+.keyboard-hint {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 2rem;
+    z-index: 100;
+    opacity: 0;
+    animation: fadeIn 0.5s ease-out 2s forwards;
+}
+
+.keyboard-hint span {
+    font-size: 0.7rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    opacity: 0.4;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* Slide Transitions */
+.slide {
+    transform: scale(1);
+}
+
+.slide.prev {
+    opacity: 0;
+}
+
+.slide.next {
+    opacity: 0;
+}
+
+/* Disable transitions for Engage slides 32-35 */
+#slide-32, #slide-33, #slide-34, #slide-35 {
+    transition: none;
+}
+
+#slide-32.prev, #slide-32.next,
+#slide-33.prev, #slide-33.next,
+#slide-34.prev, #slide-34.next,
+#slide-35.prev, #slide-35.next {
+    transform: scale(1);
+}
+
+/* Horizontal Flip Transitions */
+#slide-1,
+#slide-2,
+#slide-3 {
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+}
+
+#slide-1.flipping,
+#slide-2.flipping {
+    transition: transform 0.8s ease-in-out !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+#slide-1.active {
+    transform: perspective(1500px) rotateY(0deg);
+}
+
+#slide-1.flipping.prev {
+    transform: perspective(1500px) rotateY(-90deg);
+}
+
+#slide-2.flipping.active {
+    transform: perspective(1500px) rotateY(0deg);
+}
+
+/* Slide 6 to 10 Zoom Transition */
+#slide-3 .cesmii-hero-logo {
+    transition: transform 0.7s ease, opacity 0.7s ease;
+}
+
+#slide-3.prev .cesmii-hero-logo {
+    transform: scale(0.3);
+    opacity: 0;
+}
+
+#slide-10 .Simpsons-Video {
+    transition: transform 0.7s ease, opacity 0.7s ease;
+}
+
+#slide-10.next .Simpsons-Video {
+    transform: scale(0.3);
+    opacity: 0;
+}
+
+#slide-10.active .Simpsons-Video {
+    transform: scale(1);
+    opacity: 1;
+}
+
+/* Slide 10 to 11 Transition - TV spins away, imperatives rise up */
+#slide-10 .Simpsons-Video {
+    transition: transform 1.4s ease, opacity 1.4s ease;
+}
+
+#slide-10.prev .Simpsons-Video {
+    transform: scale(0.2) rotate(15deg);
+    opacity: 0;
+}
+
+#slide-12 .slide-content {
+    transition: transform 1.4s ease, opacity 1.4s ease;
+}
+
+#slide-12.next .slide-content {
+    transform: translateY(80px);
+    opacity: 0;
+}
+
+#slide-12.active .slide-content {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+/* Generic Wipe Transition */
+.slide.wiping {
+    opacity: 1;
+    visibility: visible;
+    z-index: 10;
+    clip-path: inset(0 100% 0 0);
+    transition: clip-path 0.5s ease-in-out;
+}
+
+.slide.wiping.fading {
+    animation: fadeOut 0.5s ease-in-out forwards;
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+.slide.wiping-in {
+    z-index: 15;
+    animation: wipeInFromLeft 0.5s ease-in-out forwards;
+}
+
+@keyframes wipeInFromLeft {
+    0% { clip-path: inset(0 100% 0 0); }
+    100% { clip-path: inset(0 0 0 0); }
+}
+
+
+/* =============================================
+   Slide 15: 6-Speaker Panel Styles
+   ============================================= */
+
+.slide-panel-6 .panel-6-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 2rem;
+    width: 100%;
+    max-width: 1200px;
+}
+
+.slide-panel-6 .panel-6-row {
+    display: flex;
+    justify-content: center;
+    gap: 10rem;
+}
+
+.slide-panel-6 .panel-6-speaker {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 220px;
+    clip-path: inset(0 100% 0 0);
+    position: relative;
+}
+
+.slide.active .panel-6-speaker {
+    animation: revealFromLeft 0.55s ease-out forwards;
+}
+
+@keyframes revealFromLeft {
+    from {
+        clip-path: inset(0 100% 0 0);
+    }
+    to {
+        clip-path: inset(0 0 0 0);
+    }
+}
+
+/* Left column - reveals when glisten line passes left side */
+.slide.active .panel-6-row:first-child .panel-6-speaker:nth-child(1) {
+    animation-delay: 1.33s;
+}
+.slide.active .panel-6-row:last-child .panel-6-speaker:nth-child(1) {
+    animation-delay: 1.33s;
+}
+
+/* Middle column - reveals when glisten line passes center */
+.slide.active .panel-6-row:first-child .panel-6-speaker:nth-child(2) {
+    animation-delay: 1.96s;
+}
+.slide.active .panel-6-row:last-child .panel-6-speaker:nth-child(2) {
+    animation-delay: 1.96s;
+}
+
+/* Right column - reveals when glisten line passes right side */
+.slide.active .panel-6-row:first-child .panel-6-speaker:nth-child(3) {
+    animation-delay: 2.59s;
+}
+.slide.active .panel-6-row:last-child .panel-6-speaker:nth-child(3) {
+    animation-delay: 2.59s;
+}
+
+/* Glisten effect */
+
+.slide-panel-6 .panel-6-speaker-image {
+    width: 180px;
+    height: 180px;
+    overflow: hidden;
+    margin-bottom: 0.75rem;
+    background: transparent;
+}
+
+.slide-panel-6 .panel-6-speaker-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.slide-panel-6 .panel-6-logo {
+    height: 30px;
+    width: auto;
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+    filter: brightness(0) invert(1);
+}
+
+.slide-panel-6 .panel-6-logo.logo-inductive {
+    height: 73px;
+}
+
+.slide-panel-6 .panel-6-logo.logo-ectobox {
+    height: 53px;
+}
+
+.slide-panel-6 .panel-6-name {
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--white);
+    margin-bottom: 0.25rem;
+}
+
+.slide-panel-6 .panel-6-title {
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.3;
+}
+
+.slide-panel-6 .panel-6-divider-container {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 60px;
+    display: flex;
+    align-items: center;
+}
+
+.slide-panel-6 .panel-6-divider {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+.slide-panel-6 .sliding-logo-wrapper {
+    position: absolute;
+    left: -200px;
+    height: 50px;
+    z-index: 10;
+    opacity: 0;
+    display: flex;
+    align-items: center;
+}
+
+.slide-panel-6 .sliding-logo {
+    height: 50px;
+    width: auto;
+}
+
+.slide-panel-6 .glisten-line {
+    position: absolute;
+    left: 55px;
+    top: 25px;
+    width: 0;
+    height: 0;
+    pointer-events: none;
+    z-index: 5;
+    filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.8))
+            drop-shadow(0 0 15px rgba(0, 174, 239, 0.6));
+}
+
+/* Top line of arrow extending upward */
+.slide-panel-6 .glisten-line::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 6px;
+    height: 50vh;
+    background: linear-gradient(
+        to top,
+        rgba(255, 255, 255, 0.9) 0%,
+        rgba(0, 174, 239, 0.6) 15%,
+        rgba(255, 255, 255, 0.7) 30%,
+        rgba(0, 174, 239, 0.4) 50%,
+        rgba(255, 255, 255, 0.3) 70%,
+        transparent 100%
+    );
+    transform-origin: bottom left;
+    transform: rotate(-45deg);
+    border-radius: 3px;
+}
+
+
+/* Bottom line of arrow extending downward */
+.slide-panel-6 .glisten-line::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 6px;
+    height: 50vh;
+    background: linear-gradient(
+        to bottom,
+        rgba(255, 255, 255, 0.9) 0%,
+        rgba(0, 174, 239, 0.6) 15%,
+        rgba(255, 255, 255, 0.7) 30%,
+        rgba(0, 174, 239, 0.4) 50%,
+        rgba(255, 255, 255, 0.3) 70%,
+        transparent 100%
+    );
+    transform-origin: top left;
+    transform: rotate(45deg);
+    border-radius: 3px;
+}
+
+
+.slide.active .sliding-logo-wrapper {
+    animation: slideLogoAcross 4.9s ease-in-out forwards;
+}
+
+@keyframes slideLogoAcross {
+    0% {
+        left: -200px;
+        opacity: 1;
+    }
+    85% {
+        left: calc(100% - 50px);
+        opacity: 1;
+    }
+    100% {
+        left: calc(100% + 100px);
+        opacity: 0;
+    }
+}
+
+/* =============================================
+   Slide 20: 7-Speaker Panel Styles
+   ============================================= */
+
+.slide-panel-7 .slide-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    position: relative;
+}
+
+.slide-panel-7 .panel-7-grid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1.5rem 2rem;
+    width: 100%;
+}
+
+.slide-panel-7 .panel-7-row {
+    display: flex;
+    justify-content: center;
+    gap: 5.6rem;
+    position: relative;
+}
+
+.slide-panel-7 .panel-7-speaker {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+    width: 252px;
+    position: relative;
+    flex: 0 0 auto;
+}
+
+.slide-panel-7 .panel-7-row {
+    align-items: stretch;
+}
+
+.slide-panel-7 .panel-7-speaker-image {
+    width: 196px;
+    height: 196px;
+    overflow: visible;
+    margin-bottom: 0.7rem;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-self: center;
+}
+
+.slide-panel-7 .panel-7-row::after {
+    content: "";
+    position: absolute;
+    top: 196px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100vw;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.6);
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+}
+
+.slide-panel-7 .panel-7-speaker-image > img:not(.panel-7-circle-frame) {
+    width: 85%;
+    height: auto;
+    object-fit: cover;
+    position: absolute;
+    bottom: 0;
+    z-index: 1;
+}
+
+.slide-panel-7 .panel-7-row:last-child .panel-7-speaker:nth-child(4) .panel-7-speaker-image > img:not(.panel-7-circle-frame) {
+    width: 127%;
+}
+
+.slide-panel-7 .panel-7-circle-frame {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 130%;
+    height: auto;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.7;
+}
+
+.slide-panel-7 .panel-7-name {
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 1.26rem;
+    color: var(--white);
+    margin-bottom: 0.2rem;
+    margin-left: 15%;
+}
+
+.slide-panel-7 .panel-7-title {
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: 0.7rem;
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.3;
+    margin-left: 15%;
+    white-space: nowrap;
+}
+
+.slide-panel-7 .panel-7-logo {
+    height: 35px;
+    width: auto;
+    margin-top: 1.05rem;
+    margin-bottom: 0.7rem;
+    filter: brightness(0) invert(1);
+    margin-left: 15%;
+}
+
+.slide-panel-7 .panel-7-logo.logo-inductive {
+    height: 45px;
+    align-self: flex-start;
+}
+
+.slide-panel-7 .panel-7-logo.logo-highbyte {
+    height: 90px;
+    margin-top: -0.3rem;
+}
+
+.slide-panel-7 .panel-7-logo.logo-flow {
+    height: 65.5px;
+    align-self: flex-start;
+    margin-top: 0rem;
+    margin-left: 10%;
+}
+
+.slide-panel-7 .panel-7-logo.logo-siemens {
+    height: 85px;
+    margin-top: -0.5rem;
+    margin-left: 12.5%;
+}
+
+.slide-panel-7 .panel-7-logo.logo-aws {
+    height: 85px;
+    margin-top: -0.3rem;
+    margin-left: -1%;
+}
+
+.slide-panel-7 .panel-7-divider {
+    width: 100vw;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.4);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+    margin: 0.5rem 0;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* Divider container positioned for panel-7 */
+.slide-panel-7 .panel-6-divider-container {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 4rem;
+    height: 60px;
+    display: flex;
+    align-items: center;
+}
+
+/* =============================================
+   Slide 15: Featured Speaker (Anthony Huffman)
+   ============================================= */
+
+.slide-speaker-feature .featured-speaker-layout {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 3rem;
+    max-width: 900px;
+}
+
+.slide-speaker-feature .featured-speaker-image {
+    width: 350px;
+    height: 350px;
+    overflow: hidden;
+    margin-bottom: 1rem;
+}
+
+.slide-speaker-feature .featured-speaker-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.slide-speaker-feature .featured-speaker-info {
+    margin-bottom: 1rem;
+}
+
+.slide-speaker-feature .featured-company-logo {
+    height: 60px;
+    width: auto;
+}
+
+.slide-speaker-feature .featured-divider-line {
+    width: 100%;
+    max-width: 600px;
+    height: 2px;
+    background: linear-gradient(to right, var(--cyan), var(--magenta));
+    margin: 1rem 0;
+    box-shadow: 0 0 15px rgba(0, 174, 239, 0.5);
+}
+
+.slide-speaker-feature .featured-speaker-details {
+    text-align: left;
+}
+
+.slide-speaker-feature .featured-speaker-name {
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 3rem;
+    color: var(--white);
+    margin-bottom: 0.5rem;
+}
+
+.slide-speaker-feature .featured-speaker-title {
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: 1.25rem;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* =============================================
+   Slide 15: CESMII Hero Logo
+   ============================================= */
+
+.slide-cesmii-hero .video-overlay-gradient {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at center,
+        rgba(43, 71, 218, 0.4) 0%,
+        rgba(35, 31, 32, 0.8) 70%);
+    z-index: 2;
+}
+
+.slide-cesmii-hero .cesmii-centered-logo {
+    position: relative;
+    z-index: 5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.slide-cesmii-hero .cesmii-centered-logo img {
+    max-width: 60%;
+    height: auto;
+}
+
+/* =============================================
+   Slide 16: ProveIT Link/QR
+   ============================================= */
+
+.slide-proveit-link .proveit-cta {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 2rem;
+}
+
+.slide-proveit-link .proveit-cta-title {
+    font-family: var(--font-headline);
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 2rem;
+}
+
+.slide-proveit-link .proveit-qr-container {
+    width: 300px;
+    height: 300px;
+    background: white;
+    padding: 1rem;
+    border-radius: 1rem;
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.slide-proveit-link .proveit-qr {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.slide-proveit-link .proveit-link {
+    font-family: var(--font-body);
+    font-size: 1.5rem;
+    color: var(--cyan);
+    text-decoration: none;
+    padding: 1rem 2rem;
+    border: 2px solid var(--cyan);
+    border-radius: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.slide-proveit-link .proveit-link:hover {
+    background: var(--cyan);
+    color: var(--primary-dark);
+}
+
+
+/* ==========================================
+   SLIDE 5: Question
+   ========================================== */
+
+.slide-question .question-gradient-bg {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top right, #4c016e 0%, #5338D3 100%);
+}
+
+.slide-question .slide-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.question-text {
+    max-width: 1200px;
+    padding: 2rem;
+}
+
+.question-text p {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 3.5rem;
+    font-weight: 400;
+    color: white;
+    text-align: center;
+    line-height: 1.4;
+}
+
+.question-text strong {
+    font-weight: 700;
+}
+
+
+/* =============================================
+   Slide 13: Seuss Book
+   ============================================= */
+
+.slide-seuss .seuss-centered {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.slide-seuss .seuss-book-image {
+    max-width: 87.5%;
+    max-height: 100vh;
+    object-fit: contain;
+}
+
+.slide-seuss .slide-background {
+    background: linear-gradient(to top right, #4c016e 0%, #5338D3 100%);
+}
+
+.slide-seuss .slide-background .video-bg,
+.slide-seuss .slide-background .video-overlay {
+    display: none;
+}
+
+/* =============================================
+   Page Turn Effect for Seuss Pages
+   ============================================= */
+
+.slide-seuss {
+    cursor: pointer;
+    /* Disable default slide transitions - page turn handles animation */
+    transition: none !important;
+}
+
+/* Override for crossfade — higher specificity (.slide.X) beats .slide-seuss !important */
+.slide.crossfade-transition {
+    transition: opacity 1s ease !important;
+}
+
+.slide-seuss .slide-content {
+    position: relative;
+    z-index: 5;
+}
+
+.slide-seuss .seuss-book-image {
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+}
+
+.slide-seuss .slide-background {
+    z-index: 1;
+}
+
+/* Page turn clone styles */
+.page-turn-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    pointer-events: none;
+    perspective: 2500px;
+}
+
+.page-turn-page {
+    position: absolute;
+    transform-style: preserve-3d;
+    transform-origin: left center;
+    backface-visibility: hidden;
+}
+
+.page-turn-page .page-front {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+}
+
+.page-turn-page .page-back {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    transform: rotateY(180deg);
+    background: linear-gradient(to right, #d4d4d4 0%, #f5f5f5 10%, #e8e8e8 100%);
+}
+
+.page-turn-page .page-shadow {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to left,
+        rgba(0, 0, 0, 0.3) 0%,
+        rgba(0, 0, 0, 0.1) 10%,
+        transparent 30%);
+    opacity: 0;
+    pointer-events: none;
+}
+
+.page-turn-page.turning .page-shadow {
+    animation: pageShadow 1.2s ease-in-out forwards;
+}
+
+@keyframes pageShadow {
+    0% { opacity: 0; }
+    30% { opacity: 1; }
+    70% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+/* Fold/curl gradient overlay */
+.page-turn-page .page-fold {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right,
+        rgba(0, 0, 0, 0.7) 0%,
+        rgba(0, 0, 0, 0.5) 2%,
+        rgba(0, 0, 0, 0.3) 5%,
+        rgba(0, 0, 0, 0.15) 10%,
+        rgba(0, 0, 0, 0.05) 20%,
+        transparent 35%,
+        transparent 100%);
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Highlight on curl edge */
+.page-turn-page .page-curl-highlight {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 15px;
+    height: 100%;
+    background: linear-gradient(to right,
+        rgba(255, 255, 255, 0.4) 0%,
+        rgba(255, 255, 255, 0.2) 30%,
+        transparent 100%);
+    opacity: 0;
+    pointer-events: none;
+}
+
+.page-turn-page.turning .page-fold {
+    animation: pageFold 1.2s ease-in-out forwards;
+}
+
+.page-turn-page.turning .page-curl-highlight {
+    animation: pageFold 1.2s ease-in-out forwards;
+}
+
+@keyframes pageFold {
+    0% { opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+/* Under page shadow */
+.page-under-shadow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right,
+        rgba(0, 0, 0, 0.7) 0%,
+        rgba(0, 0, 0, 0.5) 5%,
+        rgba(0, 0, 0, 0.3) 15%,
+        rgba(0, 0, 0, 0.1) 35%,
+        transparent 60%);
+    opacity: 0;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.page-under-shadow.visible {
+    animation: underShadow 1.2s ease-in-out forwards;
+}
+
+@keyframes underShadow {
+    0% { opacity: 0; }
+    20% { opacity: 1; }
+    80% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+
+/* =============================================
+   1920x1080 Optimizations
+   ============================================= */
+
+/* ==========================================
+   SLIDE 3: Overview extras (animate in after logo transition)
+   ========================================== */
+
+#slide-3 .slide-content {
+    position: relative;
+    overflow: hidden;
+}
+
+
+/* ==========================================
+   SLIDE 4: Laptop
+   ========================================== */
+
+.slide-laptop .slide-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    max-width: 100%;
+    padding: 0;
+}
+
+.laptop-centered {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    transform: scale(0.6);
+}
+
+.laptop-centered > img:not(.laptop-website) {
+    max-width: 100%;
+    max-height: 100vh;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 30px rgba(0, 0, 0, 0.3));
+    position: relative;
+    z-index: 1;
+}
+
+.laptop-website {
+    position: absolute;
+    width: 72.7%;
+    height: 77.2%;
+    top: 8%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: none;
+    z-index: 0;
+    border-radius: 2px;
+    object-fit: fill;
+    filter: none;
+}
+
+@media screen and (min-width: 1920px) and (min-height: 1080px) {
+    .slide-content {
+        max-width: 1700px;
+    }
+
+    .cesmii-hero-logo img {
+        max-width: 75%;
+    }
+
+    .speaker-image {
+        width: 450px;
+        height: 545px;
+    }
+
+    .speaker-name {
+        font-size: 3.75rem;
+    }
+
+    .panel-grid {
+        gap: 5rem;
+    }
+
+    .panel-speaker {
+        width: 160px;
+    }
+
+    .panel-speaker-image {
+        width: 130px;
+        height: 155px;
+    }
+
+    .slide-imperatives-v2 .imperatives-grid-v2 {
+        max-width: 1200px;
+    }
+
+    .slide-imperatives-v2 .imperative-number-box {
+        width: 260px;
+        min-height: 150px;
+    }
+}
+
+/* ==========================================
+   SLIDES 32-35: Engage With Us
+   ========================================== */
+
+.engage-bg-gradient {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top right, #4c016e 0%, #5338D3 100%);
+}
+
+.slide-engage .slide-content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 2rem 3rem;
+    text-align: left;
+}
+
+.engage-title {
+    font-family: var(--font-heading);
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 1.5rem;
+}
+
+.engage-layout {
+    display: flex;
+    flex: 1;
+    gap: 3rem;
+    align-items: flex-start;
+}
+
+.engage-left {
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+    flex-shrink: 0;
+}
+
+/* Purdue Model */
+.purdue-model {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+}
+
+.purdue-level {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    min-width: 220px;
+}
+
+.purdue-label {
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--cyan);
+    min-width: 24px;
+}
+
+.purdue-name {
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #ffffff;
+    white-space: nowrap;
+}
+
+.purdue-connector {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.5);
+    line-height: 1;
+    padding: 0.15rem 0;
+}
+
+/* Item List */
+.engage-items {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.engage-items span {
+    font-family: var(--font-heading);
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #ffffff;
+    letter-spacing: 0.05em;
+    padding: 0.25rem 0.6rem;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.08);
+}
+
+/* Right Panel */
+.engage-right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding-top: 1rem;
+}
+
+.engage-audience {
+    font-family: var(--font-body);
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--cyan);
+}
+
+.engage-cta {
+    font-family: var(--font-body);
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: #ffffff;
+    line-height: 1.4;
+}
+
+.engage-logos {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+}
+
+.engage-logo-img {
+    height: 60px;
+    width: auto;
+    object-fit: contain;
+}
+
+.engage-right-img {
+    max-width: 80%;
+    height: auto;
+    border-radius: 8px;
+    margin-top: 0.5rem;
+}
+
+/* QR Code variant */
+.engage-right-qr {
+    align-items: center;
+    justify-content: center;
+}
+
+.engage-qr-img {
+    width: 55%;
+    height: auto;
+}
+
+.engage-qr-url {
+    font-family: var(--font-body);
+    font-size: 2rem;
+    font-weight: 700;
+    color: #ffffff;
+    text-align: center;
+}
+
+/* ==========================================
+   Slide 32: Engage - PPTX Slide 44 Layout
+   ========================================== */
+
+.slide-engage-44 .engage-44-body {
+    display: flex;
+    flex: 1;
+    gap: 0;
+    align-items: stretch;
+    padding-left: 7%;
+}
+
+/* ISA-95 Purdue Model Column */
+.isa95-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-shrink: 0;
+    gap: 0;
+    padding-top: 5%;
+}
+
+.isa95-level {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.isa95-rect {
+    background: #CCBFE7;
+    border: 2px solid #CCBFE7;
+    border-radius: 999px;
+    padding: 0.5rem 2rem;
+    font-family: Arial, sans-serif;
+    font-size: 11pt;
+    font-weight: 700;
+    color: #2B45DA;
+    text-align: center;
+    line-height: 1.25;
+    min-width: 190px;
+}
+
+.isa95-badge {
+    width: 2.8rem;
+    height: 2.8rem;
+    border-radius: 50%;
+    background: #ffffff;
+    color: var(--primary-blue);
+    font-family: Arial, sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    position: relative;
+    margin-left: -1.4rem;
+    z-index: 1;
+}
+
+.isa95-connector {
+    padding: 0.25rem 0;
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    padding-right: 0.6rem;
+}
+
+.isa95-arrow-img {
+    width: 28px;
+    height: 28px;
+}
+
+/* Center Column: Clouds + Items */
+.engage-center-44 {
+    display: flex;
+    flex-direction: column;
+    padding-left: 1rem;
+    padding-top: 4%;
+}
+
+.engage-cloud-row {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-bottom: 0.8rem;
+}
+
+.cloud-wrapper {
+    position: relative;
+    display: inline-flex;
+}
+
+.cloud-icon {
+    width: 7rem;
+    height: auto;
+}
+
+.cloud-overlay {
+    position: absolute;
+    width: 2.8rem;
+    height: auto;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.engage-arrow-h {
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+}
+
+.engage-items-44 {
+    display: flex;
+    flex-direction: column;
+    margin-left: calc(28px + 0.3rem);
+    gap: 0.3rem;
+}
+
+.engage-items-44 span {
+    font-family: var(--font-heading);
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #ffffff;
+    letter-spacing: 0.05em;
+    line-height: 1.4;
+}
+
+/* Right Column */
+.engage-right-44 {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-width: 0;
+    margin-right: -3rem;
+}
+
+.engage-proveit-logo {
+    width: 630px;
+    height: 84px;
+}
+
+.engage-content-box {
+    background: transparent;
+    border: none;
+    border-radius: 16px;
+    padding: 1.5rem 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 80%;
+    margin-left: auto;
+    margin-top: 10%;
+}
+
+.engage-right-text-44 {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.engage-44-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+}
+
+.engage-44-header .engage-title {
+    margin: 0;
+    flex-shrink: 0;
+}
+
+.slide-engage-44 .engage-audience {
+    font-size: 30pt;
+    color: #9FB520;
+}
+
+.slide-engage-44 .engage-cta {
+    font-size: 28pt;
+}
+
+/* Step Cards - circle + box style (matching slide 13) */
+.engage-steps {
+    display: flex;
+    align-items: center;
+    margin-top: 1.5rem;
+    gap: 0.3rem;
+}
+
+.engage-step-circle {
+    flex-shrink: 0;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+    margin-left: -28px;
+    margin-right: -28px;
+}
+
+.engage-step-circle:first-child {
+    margin-left: 0;
+}
+
+.engage-step-circle span {
+    font-family: var(--font-body);
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #9FB520;
+    line-height: 1;
+}
+
+.engage-step-box {
+    background: #002060;
+    min-height: 70px;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem 1.5rem;
+}
+
+.step-logo {
+    height: 50px;
+    width: auto;
+    max-width: 100%;
+    object-fit: contain;
+}
+
+#slide-34 .engage-cta-list {
+    font-size: 18pt;
+    color: #ffffff;
+    font-family: var(--font-body);
+    line-height: 1.4;
+    margin: 0;
+    padding-left: 1.5rem;
+}
+
+#slide-34 .engage-cta-list li {
+    margin-bottom: 0.3rem;
+}
+
+.engage-qr-img-large {
+    width: 90%;
+    height: auto;
+    flex: 1;
+    object-fit: contain;
+    margin-top: -15%;
+    border-radius: 12px;
+}
+
+.engage-laptop-img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-top: 1rem;
+}
+
+/* ==========================================
+   Slide 34: Engage Personas (3-column)
+   ========================================== */
+
+.engage-personas {
+    display: flex;
+    flex: 1;
+    gap: 2.5rem;
+    padding: 0 3rem;
+    align-items: stretch;
+}
+
+.engage-persona {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 2rem 1.5rem;
+    border-radius: 16px;
+    background: rgba(15, 9, 67, 0.525);
+    opacity: 0;
+    transform: translateY(40px);
+}
+
+.engage-persona-header {
+    font-family: var(--font-body);
+    font-size: 24pt;
+    font-weight: 700;
+    color: #9FB520;
+    margin-bottom: 1rem;
+}
+
+.engage-persona-cta {
+    font-family: var(--font-body);
+    font-size: 16pt;
+    font-weight: 400;
+    color: #ffffff;
+    line-height: 1.4;
+    margin-bottom: 1.5rem;
+}
+
+.engage-persona-cta-list {
+    font-size: 16pt;
+    color: #ffffff;
+    font-family: var(--font-body);
+    line-height: 1.4;
+    margin: 0 0 1.5rem 0;
+    padding-left: 1.5rem;
+    text-align: left;
+}
+
+.engage-persona-cta-list li {
+    margin-bottom: 0.5rem;
+}
+
+.engage-persona-visual {
+    width: 130%;
+    max-width: 600px;
+    height: auto;
+    border-radius: 8px;
+    margin-top: auto;
+}
+
+.engage-persona .engage-steps {
+    margin-top: auto;
+    justify-content: center;
+}
+
+/* Staggered fade-up animation */
+@keyframes engagePersonaIn {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.slide.active .engage-persona-1 {
+    animation: engagePersonaIn 0.6s ease-out 0.5s forwards;
+}
+
+.slide.active .engage-persona-2 {
+    animation: engagePersonaIn 0.6s ease-out 1.5s forwards;
+}
+
+.slide.active .engage-persona-3 {
+    animation: engagePersonaIn 0.6s ease-out 2.5s forwards;
+}
+

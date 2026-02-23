@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1920">
+    <title>CESMII - ProveIt</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bitter:wght@400;700&family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/presentation.css?v=34">
+</head>
+<body>
+    <!-- Preloader Screen -->
+    <div id="preloader" class="preloader">
+        <div class="preloader-content">
+            <img src="assets/images/cesmii-logo.png" alt="CESMII" class="preloader-logo">
+            <h1 class="preloader-title">ProveIT 2026</h1>
+            <div class="preloader-progress-container">
+                <div class="preloader-progress-bar" id="preloader-progress"></div>
+            </div>
+            <p class="preloader-percent" id="preloader-percent">0%</p>
+            <p class="preloader-status" id="preloader-status">Initializing...</p>
+        </div>
+    </div>
+
+    <!-- Slide Navigation -->
+    <nav class="slide-nav">
+        <button class="nav-dot active" data-slide="0" aria-label="Slide 1"></button>
+        <button class="nav-dot" data-slide="1" aria-label="Slide 2"></button>
+        <button class="nav-dot" data-slide="2" aria-label="Slide 3"></button>
+        <button class="nav-dot" data-slide="3" aria-label="Slide 4"></button>
+        <button class="nav-dot" data-slide="4" aria-label="Slide 5"></button>
+        <button class="nav-dot" data-slide="5" aria-label="Slide 6"></button>
+        <button class="nav-dot" data-slide="6" aria-label="Slide 7"></button>
+        <button class="nav-dot" data-slide="7" aria-label="Slide 8"></button>
+        <button class="nav-dot" data-slide="8" aria-label="Slide 9"></button>
+        <button class="nav-dot" data-slide="9" aria-label="Slide 10"></button>
+        <button class="nav-dot" data-slide="10" aria-label="Slide 11"></button>
+        <button class="nav-dot" data-slide="11" aria-label="Slide 12"></button>
+        <button class="nav-dot" data-slide="12" aria-label="Slide 13"></button>
+        <button class="nav-dot" data-slide="13" aria-label="Slide 14"></button>
+        <button class="nav-dot" data-slide="14" aria-label="Slide 15"></button>
+        <button class="nav-dot" data-slide="15" aria-label="Slide 16"></button>
+        <button class="nav-dot" data-slide="16" aria-label="Slide 17"></button>
+        <button class="nav-dot" data-slide="17" aria-label="Slide 18"></button>
+        <button class="nav-dot" data-slide="18" aria-label="Slide 19"></button>
+        <button class="nav-dot" data-slide="19" aria-label="Slide 20"></button>
+        <button class="nav-dot" data-slide="20" aria-label="Slide 21"></button>
+        <button class="nav-dot" data-slide="21" aria-label="Slide 22"></button>
+        <button class="nav-dot" data-slide="22" aria-label="Slide 23"></button>
+        <button class="nav-dot" data-slide="23" aria-label="Slide 24"></button>
+        <button class="nav-dot" data-slide="24" aria-label="Slide 25"></button>
+        <button class="nav-dot" data-slide="25" aria-label="Slide 26"></button>
+        <button class="nav-dot" data-slide="26" aria-label="Slide 27"></button>
+        <button class="nav-dot" data-slide="27" aria-label="Slide 28"></button>
+        <button class="nav-dot" data-slide="28" aria-label="Slide 29"></button>
+        <button class="nav-dot" data-slide="29" aria-label="Slide 30"></button>
+        <button class="nav-dot" data-slide="30" aria-label="Slide 31"></button>
+        <button class="nav-dot" data-slide="31" aria-label="Slide 32"></button>
+        <button class="nav-dot" data-slide="32" aria-label="Slide 33"></button>
+        <button class="nav-dot" data-slide="33" aria-label="Slide 34"></button>
+        <button class="nav-dot" data-slide="34" aria-label="Slide 35"></button>
+        <button class="nav-dot" data-slide="35" aria-label="Slide 36"></button>
+        <button class="nav-dot" data-slide="36" aria-label="Slide 37"></button>
+    </nav>
+
+    <!-- Transition Overlay for slide 13 to 14 -->
+    <div class="slide-transition-overlay" id="i3x-transition">
+        <img src="assets/images/i3X_circle.png" alt="" class="transition-logo">
+    </div>
+
+
+
+    <!-- Circle Wipe Overlay for slide 25 to 26 -->
+    <div class="circle-wipe-overlay" id="circle-wipe-transition">
+        <div class="wipe-mask" id="wipe-mask"></div>
+        <img src="assets/images/i3X_circle.png" alt="" class="wipe-circle">
+        <div class="wipe-shimmer-line"></div>
+    </div>
+
+    <!-- Slides Container -->
+    <div class="slides-container">
+
+        <!-- Slide 1: CESMII Title -->
+        <section class="slide slide-2 active" id="slide-1">
+            <div class="slide-background">
+                <video class="video-bg" autoplay muted loop playsinline>
+                    <source src="assets/video/whispylinesbg_c_slower_darker.mp4" type="video/mp4">
+                </video>
+            </div>
+            <!--
+            <div class="slide-content">
+                <div class="cesmii-hero-logo">
+                    <img src="assets/images/cesmii-logo-full.png" alt="CESMII - The Smart Manufacturing Institute">
+                </div>
+            </div>
+            -->
+            <div class="scroll-indicator">
+                <div class="mouse">
+                    <div class="wheel"></div>
+                </div>
+                <span>Scroll or press arrow key</span>
+            </div>
+        </section>
+
+        <!-- Slide 2: Featuring Speakers -->
+        <section class="slide slide-3" id="slide-2">
+            <div class="slide-background">
+                <video class="video-bg" autoplay muted loop playsinline>
+                    <source src="assets/video/background.mp4" type="video/mp4">
+                </video>
+                <div class="video-overlay"></div>
+            </div>
+            <div class="slide-content">
+                <!-- Speaker Images Row -->
+                <div class="speakers-images">
+                    <div class="speaker-image">
+                        <img src="assets/images/john-dyck.png" alt="John Dyck">
+                    </div>
+                    <div class="speaker-image">
+                        <img src="assets/images/jonathan-wise.png" alt="Jonathan Wise">
+                    </div>
+                </div>
+
+                <!-- Divider Line -->
+                <div class="divider-line"></div>
+
+                <!-- Speaker Names Row -->
+                <div class="speakers-info">
+                    <div class="speaker-info">
+                        <h2 class="speaker-name">John Dyck</h2>
+                        <p class="speaker-title">CEO, CESMII</p>
+                    </div>
+                    <div class="speaker-info">
+                        <h2 class="speaker-name">Jonathan Wise</h2>
+                        <p class="speaker-title">Chief Technology Architect, CESMII</p>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-footer">
+                <img src="assets/images/cesmii-logo.png" alt="CESMII Logo" class="cesmii-logo-small">
+            </div>
+        </section>
+
+        <!-- Slide 3: CESMII Title -->
+        <section class="slide slide-2" id="slide-3">
+            <div class="slide-background">
+                <video class="video-bg" autoplay muted loop playsinline>
+                    <source src="assets/video/whispylinesbg_c_slower_darker.mp4" type="video/mp4">
+                </video>
+            </div>
+            <!--
+            <div class="slide-content">
+                <div class="cesmii-hero-logo">
+                    <img src="assets/images/cesmii-logo-full.png" alt="CESMII - The Smart Manufacturing Institute">
+                </div>
+            </div>
+            -->
+        </section>
+
+        <!-- Slide 4: Laptop -->
+        <section class="slide slide-laptop" id="slide-4">
+            <div class="slide-background">
+                <video class="video-bg" autoplay muted loop playsinline>
+                    <source src="assets/video/background.mp4" type="video/mp4">
+                </video>
+                <img src="assets/images/cesmiiDarkerOverlay.png" alt="" class="darker-overlay">
+            </div>
+            <div class="slide-content">
+                <div class="laptop-centered">
+                    <img src="assets/images/fredImage.png" alt="Manufacturing Sector Labor Productivity" class="laptop-website">
+                    <img src="assets/images/Laptop.png" alt="Laptop">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 5: Question -->
+        <section class="slide slide-question" id="slide-5">
+            <div class="slide-background">
+                <div class="question-gradient-bg"></div>
+            </div>
+            <div class="slide-content">
+                <div class="question-text">
+                    <p>What was the last major invention in manufacturing operations that drove <strong>enormous innovation</strong> &amp; <strong>value creation</strong> from OT data?</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 6: i3X Connect -->
+        <section class="slide slide-wonderware" id="slide-6">
+            <div class="slide-background">
+                <div class="wonderware-gradient-bg"></div>
+            </div>
+            <div class="slide-content">
+                <div class="wonderware-layout">
+                    <div class="wonderware-video">
+                        <video muted playsinline>
+                            <source src="assets/video/introductionToInTouchCropped.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="wonderware-logos">
+                        <img src="assets/images/Wonderware.png" alt="Wonderware" class="wonderware-logo">
+                        <img src="assets/images/msWindows31.png" alt="Microsoft Windows" class="windows-logo">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Slide 7: Constraining Innovation -->
+        <section class="slide slide-constrain-question" id="slide-7">
+            <div class="slide-background">
+                <div class="constrain-gradient-bg"></div>
+            </div>
+            <div class="slide-content">
+                <div class="constrain-text">
+                    <p>What's constraining the next major <strong>wave of innovation and productivity</strong> in operations?</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 8: ProveIT Timeline -->
+        <section class="slide slide-proveit-timeline" id="slide-8">
+            <div class="slide-background">
+                <img src="assets/images/Picture_Placeholder_31.png" class="slide-bg-img" alt="Factory">
+            </div>
+            <div class="slide-content">
+                <div class="timeline-cards">
+                    <div class="timeline-card" data-card="1">
+                        <div class="timeline-text">
+                            <p class="timeline-year">2021</p>
+                            <p class="timeline-desc">HMI &amp; OEE</p>
+                        </div>
+                        <img src="assets/images/Picture_4.png" alt="Project" class="timeline-logo">
+                        <div class="timeline-footer" data-card="1">System Integrator 1</div>
+                    </div>
+                    <div class="timeline-card" data-card="2">
+                        <div class="timeline-text">
+                            <p class="timeline-year">2022</p>
+                            <p class="timeline-desc">Quality</p>
+                        </div>
+                        <img src="assets/images/Siemens_White.png" alt="Siemens" class="timeline-logo">
+                        <div class="timeline-footer" data-card="2">System Integrator 2</div>
+                    </div>
+                    <div class="timeline-card" data-card="3">
+                        <div class="timeline-text">
+                            <p class="timeline-year">2023</p>
+                            <p class="timeline-desc">Production Scheduling</p>
+                        </div>
+                        <img src="assets/images/Picture_53.png" alt="Project" class="timeline-logo">
+                        <div class="timeline-footer" data-card="3">System Integrator 3</div>
+                    </div>
+                    <div class="timeline-card" data-card="4">
+                        <div class="timeline-text">
+                            <p class="timeline-year">2024</p>
+                            <p class="timeline-desc">Industrial AI</p>
+                        </div>
+                        <img src="assets/images/FlowSoftware_White.png" alt="Flow Software" class="timeline-logo">
+                        <div class="timeline-footer" data-card="4">System Integrator 4</div>
+                    </div>
+                    <div class="timeline-card" data-card="5">
+                        <div class="timeline-text">
+                            <p class="timeline-year">2025</p>
+                            <p class="timeline-desc">Data Integration</p>
+                        </div>
+                        <img src="assets/images/Picture_63.png" alt="Project" class="timeline-logo">
+                        <div class="timeline-footer" data-card="5">System Integrator 5</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 9: SM Platform Benefits -->
+        <section class="slide slide-benefits" id="slide-9">
+            <div class="slide-background">
+                <div class="benefits-bg"></div>
+            </div>
+            <div class="slide-content">
+                <div class="benefits-list">
+                    <div class="benefit-item">
+                        <img src="assets/images/No_Graphic.png" alt="No Standardization" class="benefit-icon">
+                        <span class="benefit-text">No Standardization</span>
+                    </div>
+                    <div class="benefit-item">
+                        <img src="assets/images/No_Graphic.png" alt="No Re-use" class="benefit-icon">
+                        <span class="benefit-text">No Re-use</span>
+                    </div>
+                    <div class="benefit-item">
+                        <img src="assets/images/No_Graphic.png" alt="No Portability" class="benefit-icon">
+                        <span class="benefit-text">No Portability</span>
+                    </div>
+                    <div class="benefit-item">
+                        <img src="assets/images/No_Graphic.png" alt="No Economies of Scale" class="benefit-icon">
+                        <span class="benefit-text">No Economies of Scale</span>
+                    </div>
+                    <div class="benefit-item">
+                        <img src="assets/images/No_Graphic.png" alt="Vendor Lock-In" class="benefit-icon">
+                        <span class="benefit-text">Vendor Lock-In</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 10: Simpsons clip -->
+        <section class="slide slide-5" id="slide-10">
+            <div class="slide-background">
+                <video class="video-bg" autoplay muted loop playsinline>
+                    <source src="assets/video/background.mp4" type="video/mp4">
+                </video>
+                <img src="assets/images/cesmiiDarkerOverlay.png" alt="" class="darker-overlay">
+            </div>
+            <div class="slide-content">
+                <div class="Simpsons-Video">
+                    <video class="simpsons-clip" muted playsinline>
+                        <source src="assets/video/simpsonsVideo2.mp4" type="video/mp4">
+                    </video>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Slide 11: Interoperability Bridge -->
+        <section class="slide slide-interop-bridge" id="slide-11">
+            <div class="slide-background">
+                <div class="interop-bridge-bg"></div>
+            </div>
+            <div class="slide-content">
+                <img src="assets/images/interoperabilitybridge.png" alt="Interoperability Bridge" class="interop-bridge-img">
+            </div>
+        </section>
+
+        <!-- Slide 12: Smart Manufacturing Imperatives -->
+        <section class="slide slide-imperatives-v2" id="slide-12">
+            <div class="slide-background">
+                <video class="video-bg" autoplay muted loop playsinline>
+                    <source src="assets/video/background.mp4" type="video/mp4">
+                </video>
+                <img src="assets/images/cesmiiDarkerOverlay.png" alt="" class="darker-overlay">
+                <div class="video-overlay"></div>
+            </div>
+            <div class="slide-content">
+                <h1 class="imperatives-title-v2">Smart Manufacturing Imperatives</h1>
+                <div class="imperatives-grid-v2">
+                    <!-- #3 at top -->
+                    <div class="imperative-row">
+                        <div class="imperative-circle"><span>3</span></div>
+                        <div class="imperative-number-box">
+                            <img src="assets/images/cesmii-logo-white.png" alt="CESMII" class="imperative-logo">
+                        </div>
+                        <div class="imperative-text">
+                            <p><strong class="accent">An open, common API </strong>for manufacturing systems, rapid app dev, scaling AI deployments, EAI, supply chain optimization...</p>
+                        </div>
+                    </div>
+                    <!-- #2 in middle -->
+                    <div class="imperative-row">
+                        <div class="imperative-circle"><span>2</span></div>
+                        <div class="imperative-number-box">
+                            <img src="assets/images/SMImperative2.png" alt="SMIP" class="imperative-logo logo-large">
+                        </div>
+                        <div class="imperative-text">
+                            <p><strong class="accent">A clear set of requirements </strong>enabling manufacturing platform and application interoperability</p>
+                        </div>
+                    </div>
+                    <!-- #1 at bottom -->
+                    <div class="imperative-row">
+                        <div class="imperative-circle"><span>1</span></div>
+                        <div class="imperative-number-box">
+                            <img src="assets/images/SMImperative1_NEW.svg" alt="SMI" class="imperative-logo logo-large">
+                        </div>
+                        <div class="imperative-text">
+                            <p><strong class="accent">Open, standards-based information-modeling strategy </strong>for manufacturing (&amp; related supply chain) devices, assets &amp; processes</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-footer">
+                <img src="assets/images/cesmii-logo.png" alt="CESMII Logo" class="cesmii-logo-small">
+            </div>
+        </section>
+
+        <!-- Slide 13: CMAPI Working Group Members -->
+        <section class="slide slide-fullscreen-image" id="slide-13">
+            <div class="slide-background">
+                <video class="video-bg" autoplay muted loop playsinline>
+                    <source src="assets/video/whispylinesbg_b_slower_darker.mp4" type="video/mp4">
+                </video>
+                <div class="video-overlay"></div>
+            </div>
+            <div class="slide-content">
+                <img src="assets/images/WorkingGroup.png" alt="CMAPI Working Group" class="fullscreen-image">
+            </div>
+        </section>
+
+        <!-- Slide 14: Matthew Parris -->
+        <section class="slide slide-speaker" id="slide-14">
+            <div class="slide-background">
+                <video class="video-bg" autoplay muted loop playsinline>
+                    <source src="assets/video/whispylinesbg_d_slower_alt_colors_5.mp4" type="video/mp4">
+                </video>
+                <div class="video-overlay"></div>
+            </div>
+            <div class="slide-content">
+                <img src="assets/images/Matthew.png" alt="Matthew Parris" class="speaker-full-image">
+            </div>
+        </section>
+
+        <!-- Slide 15: Mr. Rogers Intro -->
+        <section class="slide slide-fullscreen-image" id="slide-15">
+            <div class="slide-content">
+                <img src="assets/images/MrRogers_LR.jpg" alt="Mr. Rogers" class="fullscreen-image">
+            </div>
+        </section>
+
+        <!-- Slide 16: Seuss Book -->
+        <section class="slide slide-seuss" id="slide-16">
+            <div class="slide-background">
+                <video class="video-bg" autoplay muted loop playsinline>
+                    <source src="assets/video/whispylinesbg_d_slower_alt_colors_5.mp4" type="video/mp4">
+                </video>
+                <div class="video-overlay"></div>
+            </div>
+            <div class="slide-content">
+                <div class="seuss-centered">
+                    <img src="assets/images/seussBook.png" alt="Seuss Book" class="seuss-book-image">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 17: Seuss Page 1 -->
+        <section class="slide slide-seuss" id="slide-17">
+            <div class="slide-background"></div>
+            <div class="slide-content">
+                <div class="seuss-centered">
+                    <img src="assets/images/page1.png" alt="Page 1" class="seuss-book-image">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 18: Seuss Page 2 -->
+        <section class="slide slide-seuss" id="slide-18">
+            <div class="slide-background"></div>
+            <div class="slide-content">
+                <div class="seuss-centered">
+                    <img src="assets/images/page2.png" alt="Seuss Page 2" class="seuss-book-image">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 19: Seuss Page 3 -->
+        <section class="slide slide-seuss" id="slide-19">
+            <div class="slide-background"></div>
+            <div class="slide-content">
+                <div class="seuss-centered">
+                    <img src="assets/images/page3.png" alt="Seuss Page 3" class="seuss-book-image">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 20: Seuss Page 4 -->
+        <section class="slide slide-seuss" id="slide-20">
+            <div class="slide-background"></div>
+            <div class="slide-content">
+                <div class="seuss-centered">
+                    <img src="assets/images/page4.png" alt="Seuss Page 4" class="seuss-book-image">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 21: Seuss Page 5 -->
+        <section class="slide slide-seuss" id="slide-21">
+            <div class="slide-background"></div>
+            <div class="slide-content">
+                <div class="seuss-centered">
+                    <img src="assets/images/page5.png" alt="Seuss Page 5" class="seuss-book-image">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 22: Seuss Page 6 -->
+        <section class="slide slide-seuss" id="slide-22">
+            <div class="slide-background"></div>
+            <div class="slide-content">
+                <div class="seuss-centered">
+                    <img src="assets/images/page6.png" alt="Page 6" class="seuss-book-image">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 23: Seuss Page 7 -->
+        <section class="slide slide-seuss" id="slide-23">
+            <div class="slide-background"></div>
+            <div class="slide-content">
+                <div class="seuss-centered">
+                    <img src="assets/images/page7.png" alt="Page 7" class="seuss-book-image">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 24: Seuss Pages 7-8 -->
+        <section class="slide slide-seuss" id="slide-24">
+            <div class="slide-background"></div>
+            <div class="slide-content">
+                <div class="seuss-centered">
+                    <img src="assets/images/page8-9.png" alt="Pages 7-8" class="seuss-book-image">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 25: Seuss Page 10 -->
+        <section class="slide slide-seuss" id="slide-25">
+            <div class="slide-background"></div>
+            <div class="slide-content">
+                <div class="seuss-centered">
+                    <img src="assets/images/page10.png" alt="Page 10" class="seuss-book-image">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 26: Seuss Page 11 -->
+        <section class="slide slide-seuss" id="slide-26">
+            <div class="slide-background"></div>
+            <div class="slide-content">
+                <div class="seuss-centered">
+                    <img src="assets/images/page11.png" alt="Page 11" class="seuss-book-image">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 27: Seuss Last Page -->
+        <section class="slide slide-seuss" id="slide-27">
+            <div class="slide-background"></div>
+            <div class="slide-content">
+                <div class="seuss-centered">
+                    <img src="assets/images/XPGrass.jpg" alt="Last Page" class="seuss-book-image">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 28: Energy Sphere -->
+        <section class="slide slide-energy-sphere" id="slide-28">
+            <div class="slide-background">
+                <div class="energy-sphere-gradient"></div>
+                <video class="video-bg energy-sphere-video" muted loop playsinline>
+                    <source src="assets/video/energy_sphere.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="slide-content">
+            </div>
+        </section>
+
+        <!-- Slide 29: 7-Speaker Panel -->
+        <section class="slide slide-panel-7" id="slide-29">
+            <div class="slide-background">
+                <video class="video-bg" autoplay muted loop playsinline>
+                    <source src="assets/video/whispylinesbg_d_slower_alt_colors_5.mp4" type="video/mp4">
+                </video>
+                <div class="video-overlay"></div>
+            </div>
+            <div class="slide-content">
+                <div class="panel-7-grid">
+                    <!-- Top Row - 3 speakers -->
+                    <div class="panel-7-row">
+                        <div class="panel-7-speaker">
+                            <div class="panel-7-speaker-image">
+                                <img src="assets/images/NameKey_HalfCircle.png" alt="" class="panel-7-circle-frame">
+                                <img src="assets/images/jonathan-wise.png" alt="Jonathan Wise">
+                            </div>
+                            <p class="panel-7-name">Jonathan Wise</p>
+                            <p class="panel-7-title">Chief Technology Architect</p>
+                            <img src="assets/images/cesmii-logo.png" alt="CESMII" class="panel-7-logo">
+                        </div>
+                        <div class="panel-7-speaker">
+                            <div class="panel-7-speaker-image">
+                                <img src="assets/images/NameKey_HalfCircle.png" alt="" class="panel-7-circle-frame">
+                                <img src="assets/images/travis-cox.png" alt="Travis Cox">
+                            </div>
+                            <p class="panel-7-name">Travis Cox</p>
+                            <p class="panel-7-title">Chief Technology Evangelist</p>
+                            <img src="assets/images/InductiveAutomation_White.png" alt="Inductive Automation" class="panel-7-logo logo-inductive">
+                        </div>
+                        <div class="panel-7-speaker">
+                            <div class="panel-7-speaker-image">
+                                <img src="assets/images/NameKey_HalfCircle.png" alt="" class="panel-7-circle-frame">
+                                <img src="assets/images/aron-semle.png" alt="Aron Semle">
+                            </div>
+                            <p class="panel-7-name">Aron Semle</p>
+                            <p class="panel-7-title">Chief Technology Officer</p>
+                            <img src="assets/images/HighByte_White.png" alt="HighByte" class="panel-7-logo logo-highbyte">
+                        </div>
+                    </div>
+                    <!-- Bottom Row - 4 speakers -->
+                    <div class="panel-7-row">
+                        <div class="panel-7-speaker">
+                            <div class="panel-7-speaker-image">
+                                <img src="assets/images/NameKey_HalfCircle.png" alt="" class="panel-7-circle-frame">
+                                <img src="assets/images/graeme-welton.png" alt="Graeme Welton">
+                            </div>
+                            <p class="panel-7-name">Graeme Welton</p>
+                            <p class="panel-7-title">Co-Founder &amp; CEO</p>
+                            <img src="assets/images/FlowSoftware_White.png" alt="Flow Software" class="panel-7-logo logo-flow">
+                        </div>
+                        <div class="panel-7-speaker">
+                            <div class="panel-7-speaker-image">
+                                <img src="assets/images/NameKey_HalfCircle.png" alt="" class="panel-7-circle-frame">
+                                <img src="assets/images/caleb-eastman.png" alt="Caleb Eastman">
+                            </div>
+                            <p class="panel-7-name">Caleb Eastman</p>
+                            <p class="panel-7-title">Field CTO - Americas</p>
+                            <img src="assets/images/Siemens_White.png" alt="Siemens" class="panel-7-logo logo-siemens">
+                        </div>
+                        <div class="panel-7-speaker">
+                            <div class="panel-7-speaker-image">
+                                <img src="assets/images/NameKey_HalfCircle.png" alt="" class="panel-7-circle-frame">
+                                <img src="assets/images/scott-robertson.png" alt="Scott Robertson">
+                            </div>
+                            <p class="panel-7-name">Scott Robertson</p>
+                            <p class="panel-7-title">Manufacturing Technical Lead</p>
+                            <img src="assets/images/AWS_White.png" alt="AWS" class="panel-7-logo logo-aws">
+                        </div>
+                        <div class="panel-7-speaker">
+                            <div class="panel-7-speaker-image">
+                                <img src="assets/images/NameKey_HalfCircle.png" alt="" class="panel-7-circle-frame">
+                                <img src="assets/images/craig-egan.png" alt="Craig Egan">
+                            </div>
+                            <p class="panel-7-name">Craig Egan</p>
+                            <p class="panel-7-title">Founder and Chief Engineer</p>
+                            <img src="assets/images/mthree-logo.png" alt="MThree" class="panel-7-logo">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 30: i3X Connect -->
+        <section class="slide slide-i3x-connect" id="slide-30">
+            <div class="slide-background">
+                <video class="video-bg" autoplay muted loop playsinline>
+                    <source src="assets/video/background.mp4" type="video/mp4">
+                </video>
+                <img src="assets/images/cesmiiDarkerOverlay.png" alt="" class="darker-overlay">
+            </div>
+            <div class="slide-content">
+                <div class="Computer-i3x">
+                    <img src="assets/images/computerMonitor.png" alt="Computer Monitor">
+                    <img src="assets/images/i3Xscreen.png" alt="i3X Connect" class="monitor-website">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 31: Anthony Huffman -->
+        <section class="slide slide-speaker" id="slide-31">
+            <div class="slide-background">
+                <video class="video-bg" autoplay muted loop playsinline>
+                    <source src="assets/video/i3xBackground.mp4" type="video/mp4">
+                </video>
+                <div class="video-overlay"></div>
+            </div>
+            <div class="slide-content">
+                <img src="assets/images/Anthony.png" alt="Anthony Huffman" class="speaker-full-image">
+            </div>
+        </section>
+
+        <!-- Slide 32: Georgia-Pacific -->
+        <section class="slide slide-logo-centered" id="slide-32">
+            <div class="slide-background">
+                <video class="video-bg" autoplay muted loop playsinline>
+                    <source src="assets/video/whispylinesbg_b_slower_darker.mp4" type="video/mp4">
+                </video>
+                <div class="video-overlay"></div>
+            </div>
+            <div class="slide-content">
+                <img src="assets/images/GeorgiaPacific_Logo.png" alt="Georgia-Pacific" class="centered-logo-30">
+            </div>
+        </section>
+
+        <!-- Slide 33: Georgia-Pacific Content -->
+        <section class="slide slide-fullscreen-image" id="slide-33">
+            <div class="slide-background">
+                <div class="solid-black-bg"></div>
+            </div>
+            <div class="slide-content">
+                <img src="assets/images/GP_1.png" alt="Georgia-Pacific" class="fullscreen-image">
+            </div>
+        </section>
+
+        <!-- Slide 34: Georgia-Pacific Content -->
+        <section class="slide slide-fullscreen-image" id="slide-34">
+            <div class="slide-background">
+                <div class="solid-black-bg"></div>
+            </div>
+            <div class="slide-content">
+                <img src="assets/images/GP_2.png" alt="Georgia-Pacific" class="fullscreen-image">
+            </div>
+        </section>
+
+        <!-- Slide 35: Georgia-Pacific Summary -->
+        <section class="slide slide-fullscreen-image" id="slide-35">
+            <div class="slide-background">
+                <video class="video-bg" autoplay muted loop playsinline>
+                    <source src="assets/video/whispylinesbg_b_slower_darker.mp4" type="video/mp4">
+                </video>
+                <div class="video-overlay"></div>
+            </div>
+            <div class="slide-content">
+                <img src="assets/images/GP_Summary.png" alt="Georgia-Pacific Summary" class="fullscreen-image-85">
+            </div>
+        </section>
+
+        <!-- Slide 36: Engage - All Three Audiences -->
+        <section class="slide slide-engage" id="slide-36">
+            <div class="slide-background">
+                <div class="engage-bg-gradient"></div>
+            </div>
+            <div class="slide-content">
+                <div class="engage-44-header">
+                    <h1 class="engage-title">Engage with us</h1>
+                    <img src="assets/images/cesmiiProveIt.png" alt="CESMII ProveIT" class="engage-proveit-logo">
+                </div>
+                <div class="engage-personas">
+                    <!-- Column 1: Platform Providers -->
+                    <div class="engage-persona engage-persona-1">
+                        <h2 class="engage-persona-header">Manufacturing Platform Providers</h2>
+                        <p class="engage-persona-cta">Add i3x interoperability to your platform &amp; integration strategies</p>
+                        <img src="assets/images/CTA1.png" alt="CESMII Marketplace" class="engage-persona-visual">
+                    </div>
+                    <!-- Column 2: Domain Experts -->
+                    <div class="engage-persona engage-persona-2">
+                        <h2 class="engage-persona-header">Manufacturing Domain Experts</h2>
+                        <p class="engage-persona-cta">Turn your ideas into i3X-Compliant Apps on the CESMII Marketplace</p>
+                        <img src="assets/images/CTA2.png" alt="CESMII Marketplace" class="engage-persona-visual">
+                    </div>
+                    <!-- Column 3: Everyone -->
+                    <div class="engage-persona engage-persona-3">
+                        <h2 class="engage-persona-header">Everyone</h2>
+                        <ul class="engage-persona-cta-list">
+                            <li>Become part of the CESMII Community</li>
+                            <li>Enroll in our Manufacturing Information Modeling &amp; UNS Foundations Course</li>
+                        </ul>
+                        <img src="assets/images/CTA3.png" alt="Info Modeling Course" class="engage-persona-visual">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 37: Engage - QR Code -->
+        <section class="slide slide-engage slide-engage-44" id="slide-37">
+            <div class="slide-background">
+                <div class="engage-bg-gradient"></div>
+            </div>
+            <div class="slide-content">
+                <div class="engage-44-header">
+                    <h1 class="engage-title">Engage with us</h1>
+                    <img src="assets/images/cesmiiProveIt.png" alt="CESMII ProveIT" class="engage-proveit-logo">
+                </div>
+                <div class="engage-44-body">
+                    <div class="isa95-column">
+                        <div class="isa95-level">
+                            <div class="isa95-rect">Business<br>Planning</div>
+                            <div class="isa95-badge">L4</div>
+                        </div>
+                        <div class="isa95-connector">
+                            <img src="assets/images/arrowUp.png" alt="" class="isa95-arrow-img">
+                        </div>
+                        <div class="isa95-level">
+                            <div class="isa95-rect">Manufacturing<br>Operations</div>
+                            <div class="isa95-badge">L3</div>
+                        </div>
+                        <div class="isa95-connector">
+                            <img src="assets/images/arrowUp.png" alt="" class="isa95-arrow-img">
+                        </div>
+                        <div class="isa95-level">
+                            <div class="isa95-rect">Supervisory<br>Controls</div>
+                            <div class="isa95-badge">L2</div>
+                        </div>
+                    </div>
+                    <div class="engage-center-44">
+                        <div class="engage-cloud-row">
+                            <img src="assets/images/arrowRight.png" alt="" class="engage-arrow-h">
+                            <div class="cloud-wrapper">
+                                <img src="assets/images/slide44-graphic-27.png" alt="" class="cloud-icon">
+                                <img src="assets/images/slide44-graphic-36.png" alt="" class="cloud-overlay">
+                            </div>
+                            <img src="assets/images/arrowRight.png" alt="" class="engage-arrow-h">
+                            <div class="cloud-wrapper">
+                                <img src="assets/images/slide44-graphic-28.png" alt="" class="cloud-icon">
+                                <img src="assets/images/slide44-graphic-35.png" alt="" class="cloud-overlay">
+                            </div>
+                        </div>
+                        <div class="engage-items-44">
+                            <span>FINANCE</span>
+                            <span>SUPPLY CHAIN</span>
+                            <span>DESIGN</span>
+                            <span>ENTERPRISE ASSET MGMT</span>
+                            <span>SCHEDULING</span>
+                            <span>INVENTORY</span>
+                            <span>PRODUCTION</span>
+                            <span>QUALITY</span>
+                            <span>MAINTENANCE</span>
+                            <span>ENGINEERING</span>
+                        </div>
+                    </div>
+                    <div class="engage-right-44">
+                        <div class="engage-content-box">
+                            <img src="assets/images/slide47-picture-21.png" alt="QR Code" class="engage-qr-img-large">
+                            <p class="engage-qr-url">qrco.de/cesmiiatproveit</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
+    </div>
+
+    <script src="js/preloader.js?v=34"></script>
+    <script src="js/slide-config.js?v=34"></script>
+    <script src="js/presentation.js?v=34"></script>
+</body>
+</html>
