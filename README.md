@@ -1,6 +1,6 @@
 # CESMII at ProveIt 2026
 
-At the [ProveIt Conference](https://www.proveitconference.com/) in 2026, CESMII discussed the three Smart Manufacturing Imperatives and unveiled our community's solution to Imperative #3: the [i3X API](https://www.i3x.dev).
+At the [ProveIt Conference](https://www.proveitconference.com/) in 2026, [CESMII](https://www.cesmii.org) discussed the three Smart Manufacturing Imperatives and unveiled our community's solution to Imperative #3: the [i3X™ API](https://www.i3x.dev).
 
 ![Smart Manufacturing Imperatives: 1 - standard data model, 2 - knowledge graphs and context, 3 - a common API](illustrations/SM-Imperatives.png "Smart Manufacturing Imperatives")
 
